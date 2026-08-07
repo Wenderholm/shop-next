@@ -4,6 +4,7 @@ import ProductsHeader from "@/components/product/ProductsHeader";
 import ProductFilters from "@/components/product/ProductFilters";
 import { Category } from "@/types/category";
 import { Brand } from "@/types/brand";
+import ProductPagination from "@/components/product/ProductPagination";
 
 interface ProductsPageProps {
   searchParams: {
@@ -43,6 +44,7 @@ export default async function ProductsPage({
   }
   // powyzsze ify sklejaja zapytanie do api np. /api/products?category=Mouse&brand=Logitech&search=mouse&sort=price&page=1&limit=10
   // powyzsze zapytanie api powstalo bo uzytkownik wybral kategorie Mouse, marke Logitech, wpisal w wyszukiwarce mouse, posortowal po cenie, wybral strone 1 i limit 10 produktow na stronie
+  // wtedy dostaniemy konkretna odpowiedz z backendu, a nie wszystkie produkty, bo backend bedzie filtrowal produkty po kategoriach, markach, wyszukiwarce, sortowaniu, paginacji i limitach
   console.log("searchParams", params);
   const productsResponse = await fetch(
     `http://localhost:3000/api/products?${queryParams.toString()}`,
@@ -64,6 +66,11 @@ export default async function ProductsPage({
       <ProductFilters categories={categories} brands={brands} />
 
       <ProductGrid products={products.data} />
+
+      <ProductPagination
+        page={products.pagination.page}
+        totalPages={products.pagination.totalPages}
+      />
     </>
   );
 }
