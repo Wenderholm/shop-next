@@ -11,8 +11,10 @@
     "start:dev": "npm run docker:up && npm run dev"
   },
   "dependencies": {
+    "@prisma/adapter-pg": "^7.9.1",
     "@prisma/client": "^7.9.1",
     "next": "16.2.12",
+    "pg": "^8.22.0",
     "prisma": "^7.9.1",
     "react": "19.2.4",
     "react-dom": "19.2.4"
@@ -25,6 +27,10 @@
     "eslint": "^9",
     "eslint-config-next": "16.2.12",
     "tailwindcss": "^4",
+    "tsx": "^4.23.5",
     "typescript": "^5"
+  },
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
   }
 }
