@@ -26,7 +26,7 @@ async function main() {
     data: {
       name: "Mouse",
       description: "Computer mice for work and gaming.",
-      image: "https://...",
+      image: "https://i.ibb.co/NdFWFrn7/mause-img.png",
       exploreInfo: "Find the perfect mouse.",
     },
   });
@@ -35,7 +35,7 @@ async function main() {
     data: {
       name: "Monitor",
       description: "Monitors for work and entertainment.",
-      image: "https://...",
+      image: "https://i.ibb.co/LDsytn5D/monitor.png",
       exploreInfo: "Choose your ideal display.",
     },
   });
@@ -44,7 +44,7 @@ async function main() {
     data: {
       name: "Headphone",
       description: "Headphones for music and gaming.",
-      image: "https://...",
+      image: "https://i.ibb.co/9HTFwKdL/sluchawki.png",
       exploreInfo: "Experience premium sound.",
     },
   });
@@ -53,7 +53,7 @@ async function main() {
     data: {
       name: "Keyboard",
       description: "Mechanical and membrane keyboards.",
-      image: "https://...",
+      image: "https://i.ibb.co/xKkjztvp/klawiatura.png",
       exploreInfo: "Boost your productivity.",
     },
   });
@@ -62,7 +62,7 @@ async function main() {
     data: {
       name: "Webcam",
       description: "Webcams for streaming and meetings.",
-      image: "https://...",
+      image: "https://i.ibb.co/8nt34zKP/camera.png",
       exploreInfo: "Look your best online.",
     },
   });
