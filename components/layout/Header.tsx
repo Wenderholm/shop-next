@@ -1,11 +1,9 @@
 "use client";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import Navigation from "./Navigation";
 import HeaderActions from "./HeaderActions";
 
 export default function Header() {
-  const pathname = usePathname();
   return (
     <header className="flex flex-col justify-between mt-8 mb-8 ml-10 mr-10 border-b border-[#383B42]">
       <div className="flex flex-row justify-between items-center mb-10">

@@ -25,7 +25,8 @@ async function main() {
   const mouse = await prisma.category.create({
     data: {
       name: "Mouse",
-      description: "Computer mice for work and gaming.",
+      description:
+        "Computer mice for work and gaming. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       image: "https://i.ibb.co/NdFWFrn7/mause-img.png",
       exploreInfo: "Find the perfect mouse.",
     },
@@ -34,7 +35,8 @@ async function main() {
   const monitor = await prisma.category.create({
     data: {
       name: "Monitor",
-      description: "Monitors for work and entertainment.",
+      description:
+        "Monitors for work and entertainment. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       image: "https://i.ibb.co/LDsytn5D/monitor.png",
       exploreInfo: "Choose your ideal display.",
     },
@@ -43,7 +45,8 @@ async function main() {
   const headphone = await prisma.category.create({
     data: {
       name: "Headphone",
-      description: "Headphones for music and gaming.",
+      description:
+        "Headphones for music and gaming. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       image: "https://i.ibb.co/9HTFwKdL/sluchawki.png",
       exploreInfo: "Experience premium sound.",
     },
@@ -52,7 +55,8 @@ async function main() {
   const keyboard = await prisma.category.create({
     data: {
       name: "Keyboard",
-      description: "Mechanical and membrane keyboards.",
+      description:
+        "Mechanical and membrane keyboards. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       image: "https://i.ibb.co/xKkjztvp/klawiatura.png",
       exploreInfo: "Boost your productivity.",
     },
@@ -61,7 +65,8 @@ async function main() {
   const webcam = await prisma.category.create({
     data: {
       name: "Webcam",
-      description: "Webcams for streaming and meetings.",
+      description:
+        "Webcams for streaming and meetings. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       image: "https://i.ibb.co/8nt34zKP/camera.png",
       exploreInfo: "Look your best online.",
     },
