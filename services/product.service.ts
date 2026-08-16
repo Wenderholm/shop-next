@@ -197,3 +197,34 @@ export async function getProductById(id: number) {
 //             "name": "Logitech"
 //         }
 //     },
+
+export async function getRecommendedProducts() {
+  const products = await prisma.product.findMany({
+    select: {
+      id: true,
+      name: true,
+      description: true,
+      price: true,
+      stock: true,
+      imageUrl: true,
+
+      category: {
+        select: {
+          id: true,
+          name: true,
+        },
+      },
+
+      brand: {
+        select: {
+          id: true,
+          name: true,
+        },
+      },
+    },
+  });
+
+  const shuffled = products.sort(() => Math.random() - 0.5);
+
+  return shuffled.slice(0, 6);
+}

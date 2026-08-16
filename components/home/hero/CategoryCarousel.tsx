@@ -1,10 +1,13 @@
+"use client";
 import { Category } from "@/types/category";
 import Image from "next/image";
 import Link from "next/link";
-import ArrowRightIcon from "../icons/ArrowRightIcon";
-import ArrowLeftIcon from "../icons/ArrowLeftIcon";
-import RightArrow from "../icons/RightArrow";
+import ArrowRightIcon from "../../icons/ArrowRightIcon";
+import ArrowLeftIcon from "../../icons/ArrowLeftIcon";
+import RightArrow from "../../icons/RightArrow";
 import CarouselDots from "./CarouselDots";
+import { useState } from "react";
+
 interface CategoryCarouselProps {
   categories: Category[];
 }
@@ -12,8 +15,18 @@ interface CategoryCarouselProps {
 export default function CategoryCarousel({
   categories,
 }: CategoryCarouselProps) {
-  const category = categories[0];
+  // const category = categories[0];
+  const [currentIndex, setCurrentIndex] = useState(0);
 
+  const category = categories[currentIndex];
+
+  const handlePrevious = () => {
+    setCurrentIndex((prev) => (prev === 0 ? categories.length - 1 : prev - 1));
+  };
+
+  const handleNext = () => {
+    setCurrentIndex((prev) => (prev === categories.length - 1 ? 0 : prev + 1));
+  };
   return (
     <>
       <section
@@ -58,13 +71,19 @@ export default function CategoryCarousel({
             Explore Category <RightArrow />
           </Link>
         </div>
-        <div className="absolute inset-y-[-250px] right-[250px]">
+        <div
+          className={
+            category.name === "Mouse"
+              ? "absolute inset-y-[-250px] right-[250px]"
+              : "absolute right-[120px] top-1/2 -translate-y-1/2"
+          }
+        >
           <Image
             src={category.image}
             alt={category.name}
             width={443}
             height={853}
-            className="rotate-[-34.55deg]"
+            className={category.name === "Mouse" ? "rotate-[-34.55deg]" : ""}
           />
         </div>
         <button
@@ -81,10 +100,11 @@ export default function CategoryCarousel({
     w-[44px]
     items-center
     justify-center
-    rounded-br-[6px]
-    rounded-tr-[6px]
+    rounded-br-md
+    rounded-tr-md
     bg-[#F29145]
   "
+          onClick={handlePrevious}
         >
           <ArrowLeftIcon />
         </button>
@@ -105,12 +125,13 @@ export default function CategoryCarousel({
     rounded-tl-[6px]
     bg-[#F29145]
   "
+          onClick={handleNext}
         >
           <ArrowRightIcon />
         </button>
       </section>
       <div className="mt-6 flex justify-center">
-        <CarouselDots />
+        <CarouselDots total={categories.length} currentIndex={currentIndex} />
       </div>
     </>
   );
