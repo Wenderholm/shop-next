@@ -14,18 +14,18 @@ export default function RecommendationSection({
 }: RecommendationSectionProps) {
   const [showAll, setShowAll] = useState(false);
   return (
-    <section className="mb-20 lg:mx-10">
+    <section className="mb-25 lg:mx-10 ">
       <div className="mb-8 flex items-center justify-between">
         <h2
           className="font-medium
         text-[28px]
-        leading-[40px]
+        leading-10
         tracking-[-0.01em]
       text-[#FCFCFC]"
         >
           Recommendation
         </h2>
-        <div className="flex items-center gap-[14px]">
+        <div className=" items-center gap-[14px] hidden lg:flex">
           {products.length > 4 && (
             <>
               <SeeAllButton showAll={showAll} setShowAll={setShowAll} />

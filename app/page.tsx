@@ -3,6 +3,7 @@ import CategorySection from "@/components/home/category/CategorySection";
 import { getCategories } from "@/services/category.service";
 import RecommendationSection from "@/components/home/featuredProducts/RecommendationSection";
 import { getRecommendedProducts } from "@/services/product.service";
+import BrandSection from "@/components/home/brands/BrandSection";
 
 export default async function Home() {
   const categories = await getCategories();
@@ -15,6 +16,8 @@ export default async function Home() {
       <CategorySection categories={categories} />
 
       <RecommendationSection products={products} />
+
+      <BrandSection />
     </>
   );
 }

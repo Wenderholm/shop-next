@@ -73,48 +73,39 @@ async function main() {
   });
 
   console.log("Categories created.");
+  const rog = await prisma.brand.create({
+    data: {
+      name: "ROG",
+    },
+  });
 
   const logitech = await prisma.brand.create({
     data: {
       name: "Logitech",
-      image: "https://...",
     },
   });
 
+  const jbl = await prisma.brand.create({
+    data: {
+      name: "JBL",
+    },
+  });
+
+  const aoc = await prisma.brand.create({
+    data: {
+      name: "AOC",
+    },
+  });
   const razer = await prisma.brand.create({
     data: {
       name: "Razer",
-      image: "https://...",
     },
   });
-
-  const corsair = await prisma.brand.create({
+  const rexus = await prisma.brand.create({
     data: {
-      name: "Corsair",
-      image: "https://...",
+      name: "Rexus",
     },
   });
-
-  const steelseries = await prisma.brand.create({
-    data: {
-      name: "SteelSeries",
-      image: "https://...",
-    },
-  });
-
-  const asus = await prisma.brand.create({
-    data: {
-      name: "ASUS",
-      image: "https://...",
-    },
-  });
-  const lg = await prisma.brand.create({
-    data: {
-      name: "LG",
-      image: "https://...",
-    },
-  });
-
   console.log("Brands created.");
 
   const products = [
@@ -159,62 +150,62 @@ async function main() {
       brandId: razer.id,
     },
     {
-      name: "Corsair M75 Air",
+      name: "AOC M75 Air",
       description: "Ultra-light wireless gaming mouse.",
       price: 529.99,
       stock: 16,
       imageUrl: "https://i.ibb.co/YBBR7sYq/myszka-tlo.png",
       categoryId: mouse.id,
-      brandId: corsair.id,
+      brandId: aoc.id,
     },
 
     // =======================
     // Monitor
     // =======================
     {
-      name: "ASUS ProArt PA279CV",
+      name: "ROG PA279CV",
       description: "27-inch professional 4K monitor.",
       price: 1899.99,
       stock: 10,
       imageUrl: "https://i.ibb.co/wZ3pqjhD/moniotr-tlo.png",
       categoryId: monitor.id,
-      brandId: asus.id,
+      brandId: rog.id,
     },
     {
-      name: "ASUS ROG Swift PG32UCDM",
+      name: "ROG Swift PG32UCDM",
       description: "32-inch 4K OLED gaming monitor.",
       price: 6499.99,
       stock: 6,
       imageUrl: "https://i.ibb.co/wZ3pqjhD/moniotr-tlo.png",
       categoryId: monitor.id,
-      brandId: asus.id,
+      brandId: rog.id,
     },
     {
-      name: "LG UltraFine 32UN880",
+      name: "JBL 32UN880",
       description: "32-inch UHD Ergo monitor.",
       price: 2799.99,
       stock: 8,
       imageUrl: "https://i.ibb.co/wZ3pqjhD/moniotr-tlo.png",
       categoryId: monitor.id,
-      brandId: lg.id,
+      brandId: jbl.id,
     },
     {
-      name: "Corsair XENEON 32QHD240",
+      name: "AOC XENEON 32QHD240",
       description: "32-inch OLED gaming monitor.",
       price: 5299.99,
       stock: 7,
       imageUrl: "https://i.ibb.co/wZ3pqjhD/moniotr-tlo.png",
       categoryId: monitor.id,
-      brandId: corsair.id,
+      brandId: aoc.id,
     },
     {
-      name: "ASUS TUF Gaming VG27AQ",
+      name: "ROG TUF Gaming VG27AQ",
       description: "27-inch QHD gaming monitor.",
       price: 1699.99,
       stock: 12,
       imageUrl: "https://i.ibb.co/wZ3pqjhD/moniotr-tlo.png",
       categoryId: monitor.id,
-      brandId: asus.id,
+      brandId: rog.id,
     },
 
     // =======================
@@ -240,31 +231,31 @@ async function main() {
       brandId: razer.id,
     },
     {
-      name: "SteelSeries Arctis Nova Pro",
+      name: "Rexus Arctis Nova Pro",
       description: "Premium gaming headset with ANC.",
       price: 1499.99,
       stock: 12,
       imageUrl: "https://i.ibb.co/4wqkyj9N/sluchaw-tlo.png",
       categoryId: headphone.id,
-      brandId: steelseries.id,
+      brandId: rexus.id,
     },
     {
-      name: "Corsair HS80 Max",
+      name: "AOC HS80 Max",
       description: "Wireless RGB gaming headset.",
       price: 899.99,
       stock: 14,
       imageUrl: "https://i.ibb.co/4wqkyj9N/sluchaw-tlo.png",
       categoryId: headphone.id,
-      brandId: corsair.id,
+      brandId: aoc.id,
     },
     {
-      name: "ASUS ROG Delta S",
+      name: "ROG ROG Delta S",
       description: "USB-C gaming headset.",
       price: 799.99,
       stock: 10,
       imageUrl: "https://i.ibb.co/4wqkyj9N/sluchaw-tlo.png",
       categoryId: headphone.id,
-      brandId: asus.id,
+      brandId: rog.id,
     },
 
     // =======================
@@ -299,22 +290,22 @@ async function main() {
       brandId: razer.id,
     },
     {
-      name: "Corsair K70 RGB Pro",
+      name: "AOC K70 RGB Pro",
       description: "Mechanical gaming keyboard.",
       price: 849.99,
       stock: 16,
       imageUrl: "https://i.ibb.co/607cD4Pg/kalwaitura-tlo.png",
       categoryId: keyboard.id,
-      brandId: corsair.id,
+      brandId: aoc.id,
     },
     {
-      name: "SteelSeries Apex Pro",
+      name: "Rexus Apex Pro",
       description: "Mechanical keyboard with adjustable switches.",
       price: 1199.99,
       stock: 12,
       imageUrl: "https://i.ibb.co/607cD4Pg/kalwaitura-tlo.png",
       categoryId: keyboard.id,
-      brandId: steelseries.id,
+      brandId: rexus.id,
     },
 
     // =======================
@@ -349,13 +340,13 @@ async function main() {
       brandId: razer.id,
     },
     {
-      name: "ASUS Webcam C3",
+      name: "ROG Webcam C3",
       description: "Full HD webcam with dual microphones.",
       price: 349.99,
       stock: 18,
       imageUrl: "https://i.ibb.co/wZ3pqjhD/moniotr-tlo.png",
       categoryId: webcam.id,
-      brandId: asus.id,
+      brandId: rog.id,
     },
     {
       name: "Logitech C920 HD Pro",

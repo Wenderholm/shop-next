@@ -226,5 +226,9 @@ export async function getRecommendedProducts() {
 
   const shuffled = products.sort(() => Math.random() - 0.5);
 
-  return shuffled.slice(0, 6);
+  // tu zamieniamy price na number bo w bazie danych jest to decimal i w JS jest to string a my chcemy mieć number
+  return shuffled.slice(0, 6).map((product) => ({
+    ...product,
+    price: Number(product.price),
+  }));
 }

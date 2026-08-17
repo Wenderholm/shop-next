@@ -8,7 +8,7 @@ export default function SeeAllButton({
     <button
       type="button"
       onClick={() => setShowAll(!showAll)}
-      className="text-orange text-[16px] leading-[26px] font-medium"
+      className="text-orange text-[16px] leading-6.5 font-medium "
     >
       {showAll ? "Show less" : "See all"}
     </button>

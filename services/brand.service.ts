@@ -5,7 +5,6 @@ export async function getBrands() {
     select: {
       id: true,
       name: true,
-      image: true,
     },
   });
 }
