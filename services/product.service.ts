@@ -1,10 +1,21 @@
 import { prisma } from "@/lib/prisma";
 import { Prisma } from "@/app/generated/prisma/client";
 
+function serializeProductPrice<
+  T extends { price: Prisma.Decimal | number | string },
+>(product: T) {
+  return {
+    ...product,
+    price: Number(product.price),
+  };
+}
+
 interface ProductFilters {
   category?: string;
   brand?: string;
   search?: string;
+  minPrice?: number;
+  maxPrice?: number;
   sort?: string;
   page: number;
   limit: number;
@@ -17,18 +28,41 @@ export async function getProducts(filters: ProductFilters) {
         name: filters.category,
       },
     }),
+
     ...(filters.brand && {
       brand: {
         name: filters.brand,
       },
     }),
+
     ...(filters.search && {
       name: {
         contains: filters.search,
-        mode: "insensitive", // - ignorowanie wielkosci liter w wyszukiwaniu
+        mode: "insensitive",
       },
     }),
+
+    ...(filters.minPrice || filters.maxPrice
+      ? {
+          price: {
+            ...(filters.minPrice && {
+              gte: filters.minPrice,
+            }),
+
+            ...(filters.maxPrice && {
+              lte: filters.maxPrice,
+            }),
+          },
+        }
+      : {}),
   };
+
+  const orderBy =
+    filters.sort === "priceAsc"
+      ? { price: "asc" as const }
+      : filters.sort === "priceDesc"
+        ? { price: "desc" as const }
+        : { createdAt: "desc" as const };
 
   const products = await prisma.product.findMany({
     // include: {
@@ -61,13 +95,7 @@ export async function getProducts(filters: ProductFilters) {
     // poniezej zamieniamy jak w azapytaniu bedzie sort=priceAsc zmieniamy na orderBy: { price: "asc" } a jak bedzie sort=priceDesc to orderBy: { price: "desc" } a jak nie bedzie sort to undefined
     // mozna jak wyzej jest porsciej ale w miare rozbudowy filtoowania np roznaco po cenie bedzie to trudne do czytania i zrozumienia wiec lepiej tak jak ponizej
     // ORDER BY price ASC - sort=priceAsc
-    orderBy:
-      filters.sort === "priceAsc"
-        ? { price: "asc" }
-        : filters.sort === "priceDesc"
-          ? { price: "desc" }
-          : undefined,
-
+    orderBy,
     // jak dziala skip i take w prisma to skip pomija ileś tam rekordów a take bierze ileś tam rekordów
     // np  strona 1 skip: 0, take: 10 -> pomija pierwsze 0 rekordów i bierze kolejne 10 rekordów czyli rekordy od 1 do 10
     // np  strona 2 skip: 10, take: 10 -> pomija pierwsze 10 rekordów i bierze kolejne 10 rekordów czyli rekordy od 11 do 20
@@ -82,7 +110,7 @@ export async function getProducts(filters: ProductFilters) {
       description: true,
       price: true,
       stock: true,
-      imageUrl: true,
+      imageUrls: true,
 
       category: {
         select: {
@@ -118,7 +146,7 @@ export async function getProducts(filters: ProductFilters) {
   // total
   // totalPages
   return {
-    data: products,
+    data: products.map(serializeProductPrice),
 
     pagination: {
       page: filters.page,
@@ -130,7 +158,7 @@ export async function getProducts(filters: ProductFilters) {
 }
 
 export async function getProductById(id: number) {
-  return prisma.product.findUnique({
+  const product = await prisma.product.findUnique({
     where: {
       id,
     },
@@ -139,6 +167,8 @@ export async function getProductById(id: number) {
       brand: true,
     },
   });
+
+  return product ? serializeProductPrice(product) : null;
 }
 
 // include: true, bo chcemy pobrać również dane z relacji (category i brand) dla każdego produktu
@@ -206,7 +236,7 @@ export async function getRecommendedProducts() {
       description: true,
       price: true,
       stock: true,
-      imageUrl: true,
+      imageUrls: true,
 
       category: {
         select: {
@@ -227,8 +257,5 @@ export async function getRecommendedProducts() {
   const shuffled = products.sort(() => Math.random() - 0.5);
 
   // tu zamieniamy price na number bo w bazie danych jest to decimal i w JS jest to string a my chcemy mieć number
-  return shuffled.slice(0, 6).map((product) => ({
-    ...product,
-    price: Number(product.price),
-  }));
+  return shuffled.slice(0, 6).map(serializeProductPrice);
 }

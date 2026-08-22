@@ -29,7 +29,7 @@ export default function RecommendationSection({
           {products.length > 4 && (
             <>
               <SeeAllButton showAll={showAll} setShowAll={setShowAll} />
-              <RightArrow />
+              <RightArrow className="w-6 h-6" />
             </>
           )}
         </div>

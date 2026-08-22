@@ -1,20 +1,20 @@
-interface RightArrowProps {
+interface LeftArrowProps {
   className?: string;
 }
 
-export default function RightArrow({ className }: RightArrowProps) {
+export default function LeftArrow({ className }: LeftArrowProps) {
   return (
     <svg
       className={className}
-      // width="24"
-      // height="24"
-      viewBox="0 0 24 24"
+      // width="20"
+      // height="20"
+      viewBox="0 0 20 20"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
-        d="M20 12L4 12M14 6L20 12L14 18"
-        stroke="#F29145"
+        d="M3.33325 10L16.6666 10M8.33325 15L3.33325 10L8.33325 5"
+        stroke="#FCFCFC"
         strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"

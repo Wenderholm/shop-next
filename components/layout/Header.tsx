@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
-import Navigation from "./Navigation";
-import HeaderActions from "./HeaderActions";
+import Navigation from "@/components/layout/Navigation";
+import HeaderActions from "@/components/layout/HeaderActions";
 
 export default function Header() {
   return (

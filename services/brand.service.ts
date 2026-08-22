@@ -8,3 +8,24 @@ export async function getBrands() {
     },
   });
 }
+
+export async function getSearchBrands(category?: string) {
+  return prisma.brand.findMany({
+    where: category
+      ? {
+          products: {
+            some: {
+              category: {
+                name: category,
+              },
+            },
+          },
+        }
+      : undefined,
+
+    select: {
+      id: true,
+      name: true,
+    },
+  });
+}

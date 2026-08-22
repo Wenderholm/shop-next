@@ -11,8 +11,8 @@ const resources = ["E-books", "Tutorials", "Course", "Blog"];
 
 export default function Footer() {
   return (
-    <footer className=" bg-[#222327] px-8 py-35 lg:px-15 lg:py-35">
-      <div className="flex flex-col gap-20 lg:flex-row lg:justify-between ">
+    <footer className=" bg-[#222327] px-8 py-35 lg:px-15 lg:pl-35 lg:pr-40">
+      <div className="flex flex-col lg:flex-row lg:justify-between ">
         <div>
           <h2 className="mb-6 text-[36px] font-semibold leading-[46px] tracking-[-0.01em] text-[#FCFCFC]">
             <span className="text-orange">Nexus</span>Hub

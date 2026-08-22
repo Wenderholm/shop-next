@@ -27,7 +27,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         <AddToCartButton product={product} />
 
         <Image
-          src={product.imageUrl}
+          src={product.imageUrls[0]}
           alt={product.name}
           width={300}
           height={280}

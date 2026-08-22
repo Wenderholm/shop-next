@@ -68,7 +68,7 @@ export default function CategoryCarousel({
     mb-20
   "
           >
-            Explore Category <RightArrow />
+            Explore Category <RightArrow className="w-6 h-6" />
           </Link>
         </div>
         <div

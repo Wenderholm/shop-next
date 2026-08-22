@@ -1,8 +1,11 @@
-import { NextResponse } from "next/server";
-import { getBrands } from "@/services/brand.service";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function GET() {
-  const brands = await getBrands();
+import { getSearchBrands } from "@/services/brand.service";
+
+export async function GET(request: NextRequest) {
+  const category = request.nextUrl.searchParams.get("category");
+
+  const brands = await getSearchBrands(category ?? undefined);
 
   return NextResponse.json(brands);
 }

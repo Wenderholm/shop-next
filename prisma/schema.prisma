@@ -18,7 +18,7 @@ model Category {
   description String
   image       String
   exploreInfo String
-
+ 
   products Product[]
 }
 
@@ -28,7 +28,8 @@ model Product {
   description String
   price       Decimal @db.Decimal(10, 2)
   stock       Int
-  imageUrl    String
+  imageUrls   String[]
+  createdAt DateTime @default(now())
 
   categoryId Int
   brandId    Int

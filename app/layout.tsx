@@ -4,7 +4,8 @@ import { Inter } from "next/font/google";
 import Container from "@/components/layout/Container";
 import Footer from "@/components/layout/Footer";
 import Header from "@/components/layout/Header";
-
+import { CartNotificationProvider } from "@/contexts/CartNotificationContext";
+import CartNotification from "@/components/notifications/CartNotification";
 export const metadata: Metadata = {
   title: "DevStock",
   description: "DevStock Shop",
@@ -13,9 +14,8 @@ export const metadata: Metadata = {
 const inter = Inter({
   subsets: ["latin"],
 });
-
-// tu children to HomePage, ProductsPage, ContactPage, ProductPage
 export default function RootLayout({
+  // tu children to HomePage, ProductsPage, ContactPage, ProductPage
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -23,13 +23,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`bg-[#1A1A1A] text-white ${inter.className}`}>
-        <Container>
-          <Header />
+        <CartNotificationProvider>
+          <Container>
+            <Header />
+            <CartNotification />
+            <main>{children}</main>
 
-          <main>{children}</main>
-
-          <Footer />
-        </Container>
+            <Footer />
+          </Container>
+        </CartNotificationProvider>
       </body>
     </html>
   );

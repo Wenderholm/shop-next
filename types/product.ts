@@ -4,7 +4,7 @@ export interface Product {
   description: string;
   price: number;
   stock: number;
-  imageUrl: string;
+  imageUrls: string[];
 
   category: {
     id: number;
@@ -26,4 +26,16 @@ export interface ProductsResponse {
     total: number;
     totalPages: number;
   };
+}
+interface ProductFilters {
+  category?: string;
+  brand?: string;
+  search?: string;
+  sort?: string;
+
+  minPrice?: number;
+  maxPrice?: number;
+
+  page: number;
+  limit: number;
 }

@@ -33,6 +33,10 @@ export async function GET(request: Request) {
   const sort = searchParams.get("sort");
   const page = Number(searchParams.get("page")) || 1; // jezeli ktos wejdzeie na /api/products to page z autoamtu ustai sie na 1, bo nie bedzie w query stringu page, a jezeli ktos wejdzie na /api/products?page=2 to page bedzie rowne 2
   const limit = Number(searchParams.get("limit")) || 10; // jezeli ktos wejdzieie na /api/products to limit z autoamtu ustai sie na 10, bo nie bedzie w query stringu limit, a jezeli ktos wejdzie na /api/products?limit=20 to limit bedzie rowne 20
+
+  const minPrice = Number(searchParams.get("minPrice")) || undefined;
+
+  const maxPrice = Number(searchParams.get("maxPrice")) || undefined;
   const products = await getProducts({
     // tu category bedzie Mouse jesli w query stringu bedzie category=Mouse, a jesli nie bedzie to bedzie undefined
     // w getProducts w product.service.ts wejdzie to w zapytanie where i bedzie szukac produktow z danej kategorii, a jesli category bedzie undefined to nie bedzie filtrowac po kategorii
@@ -42,6 +46,8 @@ export async function GET(request: Request) {
     sort: sort ?? undefined,
     page,
     limit,
+    minPrice,
+    maxPrice,
   });
 
   return NextResponse.json(products);

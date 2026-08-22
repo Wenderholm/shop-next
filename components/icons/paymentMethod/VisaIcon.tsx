@@ -37,7 +37,7 @@ export default function VisaIcon() {
           width="66.5428"
           height="49.959"
           filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
           <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feColorMatrix
