@@ -13,21 +13,6 @@ interface ProductFiltersProps {
   brands: Brand[];
 }
 
-const sortOptions = [
-  {
-    label: "Latest",
-    value: "",
-  },
-  {
-    label: "Price ↑",
-    value: "priceAsc",
-  },
-  {
-    label: "Price ↓",
-    value: "priceDesc",
-  },
-];
-
 export default function ProductFilters({
   categories,
   brands,
@@ -54,7 +39,9 @@ export default function ProductFilters({
             : "border-[#616674]"
         }`}
             >
-              {!searchParams.get("category") && <CheckIcon />}
+              {!searchParams.get("category") && (
+                <CheckIcon className="w-4.5 h-4.5" />
+              )}
             </div>
             <span>All</span>
           </Link>
@@ -77,7 +64,7 @@ export default function ProductFilters({
             ${active ? "border-[#E5610A] bg-[#E5610A]" : "border-[#616674]"}
           `}
                 >
-                  {active && <CheckIcon />}
+                  {active && <CheckIcon className="w-4.5 h-4.5" />}
                 </div>
 
                 <span>{category.name}</span>
@@ -114,7 +101,9 @@ export default function ProductFilters({
           }
         `}
             >
-              {!searchParams.get("brand") && <CheckIcon />}
+              {!searchParams.get("brand") && (
+                <CheckIcon className="w-4.5 h-4.5" />
+              )}
             </div>
 
             <span>All</span>
@@ -142,7 +131,7 @@ export default function ProductFilters({
               ${active ? "border-[#E5610A] bg-[#E5610A]" : "border-[#616674]"}
             `}
                 >
-                  {active && <CheckIcon />}
+                  {active && <CheckIcon className="w-4.5 h-4.5" />}
                 </div>
 
                 <span>{brand.name}</span>

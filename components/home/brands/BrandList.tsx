@@ -29,7 +29,7 @@ export default function BrandList({ brands }: BrandListProps) {
         </h2>
         <div className="flex items-center gap-[14px]">
           <SeeAllButton showAll={showAll} setShowAll={setShowAll} />
-          <RightArrow className="w-6 h-6" />
+          <RightArrow className="w-6 h-6"/>
         </div>
       </div>
       <div className="overflow-hidden">

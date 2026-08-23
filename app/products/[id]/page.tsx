@@ -18,7 +18,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
   const product: Product = await response.json();
   return (
-    <div className="px-4 py-10 sm:px-6 lg:px-8">
+    <div className="px-4 pb-10 sm:px-6 lg:px-8">
       <ProductBreadcrumb
         productName={product.name}
         categoryName={product.category.name}

@@ -1,0 +1,192 @@
+"use client";
+
+import Link from "next/link";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { registerFormSchema } from "@/schemas/register.schema";
+import RegisterSuccess from "./RegisterSuccess";
+import { useRegister } from "@/hooks/useRegister";
+
+type RegisterFormData = z.infer<typeof registerFormSchema>;
+
+const inputBaseClass =
+  "mt-3 w-full rounded-xl border bg-[#252525] px-4 py-3 text-base text-white outline-none transition placeholder:text-[#9b9b9b]";
+
+const inputStateClass = (hasError: boolean) =>
+  hasError
+    ? "border-red-500 focus:border-red-500"
+    : "border-[#4a4f5f] focus:border-[#f29145]";
+
+const labelClass = "text-sm font-medium text-[#f3f3f3]";
+const errorClass = "mt-2 text-sm text-[#ff6b6b]";
+
+export default function RegisterForm() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<RegisterFormData>({
+    resolver: zodResolver(registerFormSchema),
+  });
+
+  const { registerUser, isRegistered, submitError } = useRegister();
+
+  const onSubmit = async (data: RegisterFormData) => {
+    await registerUser(data);
+  };
+
+  if (isRegistered) {
+    return <RegisterSuccess />;
+  }
+
+  return (
+    <div className="w-full max-w-110">
+      <div className="mb-10 text-center text-[3rem] font-bold leading-none tracking-[-0.04em] text-white">
+        <span className="text-orange">Nexus</span>
+        <span>Hub</span>
+      </div>
+
+      <div className="rounded-2xl border border-[#343846] bg-[#222222] px-6 py-7 text-white shadow-[0_24px_80px_rgba(0,0,0,0.35)] sm:px-7">
+        <h1 className="text-[2rem] font-semibold tracking-[-0.03em] text-[#f3f3f3]">
+          Create Account
+        </h1>
+
+        <div className="mt-5 h-px w-full bg-[#30333d]" />
+
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          noValidate
+          className="mt-8 space-y-7"
+        >
+          {submitError && (
+            <p className="rounded-xl border border-red-500/40 bg-red-500/10 px-4 py-3 text-sm text-[#ff8b8b]">
+              {submitError}
+            </p>
+          )}
+
+          <div>
+            <label htmlFor="firstName" className={labelClass}>
+              First Name
+            </label>
+
+            <input
+              id="firstName"
+              placeholder="Your first name"
+              className={`${inputBaseClass} ${inputStateClass(Boolean(errors.firstName))}`}
+              {...register("firstName")}
+            />
+
+            {errors.firstName && (
+              <p className={errorClass}>{errors.firstName.message}</p>
+            )}
+          </div>
+
+          <div>
+            <label htmlFor="email" className={labelClass}>
+              Email
+            </label>
+
+            <input
+              id="email"
+              type="email"
+              placeholder="Your Email"
+              className={`${inputBaseClass} ${inputStateClass(Boolean(errors.email))}`}
+              {...register("email")}
+            />
+
+            {errors.email && (
+              <p className={errorClass}>{errors.email.message}</p>
+            )}
+          </div>
+
+          <div>
+            <label htmlFor="password" className={labelClass}>
+              Password
+            </label>
+
+            <input
+              id="password"
+              type="password"
+              placeholder="Password"
+              className={`${inputBaseClass} ${inputStateClass(Boolean(errors.password))}`}
+              {...register("password")}
+            />
+
+            <p
+              className={`mt-2 text-sm ${errors.password ? "text-[#ff6b6b]" : "text-[#c4c4c4]"}`}
+            >
+              Password must be at least 8 characters and include at least 1
+              upper case letter, 1 lower case letter and 1 number.
+            </p>
+          </div>
+
+          <div>
+            <label htmlFor="confirmPassword" className={labelClass}>
+              Confirm Password
+            </label>
+
+            <input
+              id="confirmPassword"
+              type="password"
+              placeholder="Confirm Password"
+              className={`${inputBaseClass} ${inputStateClass(Boolean(errors.confirmPassword))}`}
+              {...register("confirmPassword")}
+            />
+
+            {errors.confirmPassword && (
+              <p className={errorClass}>{errors.confirmPassword.message}</p>
+            )}
+          </div>
+
+          <div>
+            <label htmlFor="address" className={labelClass}>
+              Country or region
+            </label>
+
+            <select
+              id="address"
+              className={`${inputBaseClass} ${inputStateClass(Boolean(errors.address))} appearance-none pr-12`}
+              {...register("address")}
+            >
+              <option value="">Select your country</option>
+              <option value="Poland">Poland</option>
+              <option value="Germany">Germany</option>
+              <option value="France">France</option>
+              <option value="Spain">Spain</option>
+              <option value="Italy">Italy</option>
+              <option value="Netherlands">Netherlands</option>
+            </select>
+
+            {errors.address && (
+              <p className={errorClass}>{errors.address.message}</p>
+            )}
+          </div>
+
+          <label className="flex items-start gap-3 text-sm leading-6 text-[#d4d4d4]">
+            <input
+              type="checkbox"
+              defaultChecked
+              className="mt-1 h-5 w-5 shrink-0 accent-orange"
+            />
+
+            <span>
+              By creating an account and check, you agree to the{" "}
+              <span className="text-orange">Conditions of Use</span> and{" "}
+              <span className="text-orange">Privacy Notice</span>.
+            </span>
+          </label>
+
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="w-full rounded-xl bg-orange px-4 py-3 text-lg font-medium text-[#1d1d1d] transition hover:brightness-105"
+          >
+            {isSubmitting ? "Creating Account..." : "Create Account"}
+          </button>
+        </form>
+      </div>
+    </div>
+  );
+}

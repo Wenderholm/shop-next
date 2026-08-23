@@ -1,15 +1,41 @@
 "use client";
 import { Product } from "@/types/product";
-import React from "react";
+import React, { useState } from "react";
 import ProductGallery from "./ProductGallery";
+import GreenShield from "../icons/GreenShield";
+import SuccessMark from "../icons/SuccessMark";
+import CheckIcon from "../icons/Check";
+import CartIcon from "../icons/CartIcon";
+import { useCartNotification } from "@/contexts/CartNotificationContext";
 
 interface ProductDetailsProps {
   product: Product;
 }
 
 export default function ProductDetails({ product }: ProductDetailsProps) {
-  const [quantity, setQuantity] = React.useState(1);
+  const currentDate = new Date().toLocaleDateString("en-US", {
+    day: "numeric",
+    month: "short",
+  });
+  const estimatedDate = new Date();
+  estimatedDate.setDate(estimatedDate.getDate() + 3);
+  const estimatedDateString = estimatedDate.toLocaleDateString("en-US", {
+    day: "numeric",
+    month: "short",
+  });
+
+  const { showNotification } = useCartNotification();
+  const [quantity, setQuantity] = useState(1);
+  const [isShowDescription, setIsShowDescription] = useState(false);
+  const [selectedColor, setSelectedColor] = useState("white");
   const subtotal = Number((product.price * quantity).toFixed(2));
+
+  const handleAddToCart = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    showNotification();
+  };
 
   return (
     <div className="grid grid-cols-1 gap-10 lg:grid-cols-[422px_minmax(0,1fr)_420px] lg:items-start lg:gap-10.5">
@@ -20,57 +46,47 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
       />
 
       {/* ŚRODEK - INFORMACJE */}
-      <div className="max-w-105 pt-2">
-        <h1 className="text-[48px] font-medium leading-[1.1] tracking-[-0.03em] text-white">
+      <div className="max-w-105 pt-2 ">
+        <h1 className="text-[28px] font-medium leading-10 tracking-[-0.01em] text-[#FCFCFC]">
           {product.name}
         </h1>
 
-        <div className="mt-7 inline-flex rounded-lg bg-[#E5610A] px-4 py-2 text-sm font-medium text-white">
+        <div className="mt-5 inline-flex rounded-md bg-[#E5610A] px-[10px] py-[6px] text-sm leading-6 font-medium text-[#FCFCFC]">
           {product.category.name}
         </div>
 
-        <p className="mt-10 text-[56px] font-medium leading-none tracking-[-0.04em] text-white">
+        <p className="mt-8 text-[32px] font-medium leading-11 tracking-[-0.01em] text-[#FCFCFC]">
           ${product.price.toFixed(2)}
         </p>
-
-        <p className="mt-12 max-w-97.5 text-[20px] leading-normal text-[#E5E5E5]">
+        <p
+          className={`mt-8 text-[16px] leading-[26px] text-[#FCFCFC] ${isShowDescription ? "" : "line-clamp-1"}`}
+        >
           {product.description}
         </p>
-
         <button
           type="button"
-          className="mt-4 text-[16px] font-medium text-[#E58A3A] transition hover:text-[#F09B55]"
+          className="text-[16px] leading-[26px] font-medium text-[#E58A3A] transition hover:text-[#F09B55]"
+          onClick={() => setIsShowDescription(!isShowDescription)}
         >
-          View More
+          {isShowDescription ? "View Less" : "View More"}
         </button>
 
-        <div className="mt-16">
-          <p className="text-[18px] font-medium text-[#A3A3A3]">
+        <div className="mt-8">
+          <p className="text-[18px] font-medium leading-[28px] text-[#B0B0B0]">
             Shipping Available
           </p>
 
-          <div className="mt-5 flex max-w-83 items-start gap-4 rounded-[10px] border border-[#DDDDDD] bg-transparent px-5 py-4">
-            <div className="mt-1 flex h-6 w-6 items-center justify-center rounded-full border border-[#22C55E] text-[#22C55E]">
-              <svg
-                aria-hidden="true"
-                viewBox="0 0 24 24"
-                className="h-4 w-4"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M20 6 9 17l-5-5" />
-              </svg>
+          <div className="mt-[14px] flex justify-center gap-2 max-w-83 rounded-md border border-[#FCFCFC] px-5 py-4">
+            <div className="">
+              <GreenShield />
             </div>
 
             <div>
               <p className="text-[16px] font-medium text-white">
-                {product.brand.name} Courier
+                NexusHub Courier
               </p>
               <p className="mt-2 text-[16px] text-[#D4D4D4]">
-                Estimated arrival 30 Sep - 3 Oct
+                Estimated arrival {currentDate} - {estimatedDateString}
               </p>
             </div>
           </div>
@@ -78,61 +94,60 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
       </div>
 
       {/* PRAWA STRONA - PANEL ZAKUPU */}
-      <div className="h-fit rounded-lg border border-[#353535] bg-[#262626] px-6 py-8 lg:px-6.5">
+      <div className="h-fit rounded-lg border border-[#353535] bg-[#262626] p-6  lg:p-6">
         <div>
-          <p className="text-[18px] font-medium text-[#A3A3A3]">Colors</p>
+          <p className="text-[18px] font-medium leading-7  text-[#B0B0B0]">
+            Colors
+          </p>
 
-          <div className="mt-5 flex items-center gap-4">
+          <div className="mt-[14px] flex items-center gap-4">
             <button
               type="button"
               aria-label="Selected white color"
-              className="flex h-14.5 w-14.5 items-center justify-center rounded-lg border border-[#F3F3F3] bg-[#F8F8F8] text-[#1D1D1D]"
+              className="flex h-[54px] w-[54px] items-center justify-center rounded-lg border border-[#F3F3F3] bg-[#F8F8F8] text-[#1D1D1D]"
+              onClick={() => setSelectedColor("white")}
             >
-              <svg
-                aria-hidden="true"
-                viewBox="0 0 24 24"
-                className="h-6 w-6"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M20 6 9 17l-5-5" />
-              </svg>
+              {selectedColor === "white" && <CheckIcon className="w-6 h-6" />}
             </button>
 
             <button
               type="button"
               aria-label="Alternate dark color"
-              className="h-14.5 w-14.5 rounded-lg border border-[#3A3F4A] bg-[#272932]"
-            />
+              className="flex h-[54px] w-[54px] items-center justify-center rounded-lg border border-[#383B42] bg-[#222327]"
+              onClick={() => setSelectedColor("dark")}
+            >
+              {selectedColor === "dark" && (
+                <CheckIcon className="w-6 h-6" color="#FCFCFC" />
+              )}
+            </button>
           </div>
         </div>
 
-        <div className="mt-9">
-          <p className="text-[18px] font-medium text-[#A3A3A3]">Quantity</p>
+        <div className="mt-8">
+          <p className="text-[18px] leading-7 font-medium text-[#B0B0B0]">
+            Quantity
+          </p>
 
           <div className="mt-5 flex items-center gap-4">
-            <div className="flex h-14.5 items-center rounded-lg border border-[#D5D5D5] px-4 text-white">
+            <div className="flex h-14 items-center rounded-lg border border-[#D5D5D5] px-4 text-[#FCFCFC]">
               <button
                 type="button"
                 aria-label="Decrease quantity"
-                className="flex h-10 w-10 items-center justify-center text-[34px] font-light leading-none text-white disabled:cursor-not-allowed disabled:opacity-40"
+                className="flex h-9 w-9 items-center justify-center text-[34px] font-light leading-none text-[#FCFCFC] disabled:cursor-not-allowed disabled:opacity-40"
                 disabled={quantity <= 1}
                 onClick={() => setQuantity(Math.max(1, quantity - 1))}
               >
                 -
               </button>
 
-              <span className="min-w-7 text-center text-[18px] font-medium">
+              <span className="min-w-7 text-center text-[16px] font-medium">
                 {quantity}
               </span>
 
               <button
                 type="button"
                 aria-label="Increase quantity"
-                className="flex h-10 w-10 items-center justify-center text-[34px] font-light leading-none text-white disabled:cursor-not-allowed disabled:opacity-40"
+                className="flex h-9 w-9 items-center justify-center text-[34px] font-light leading-none text-[#FCFCFC] disabled:cursor-not-allowed disabled:opacity-40"
                 disabled={quantity >= product.stock}
                 onClick={() =>
                   setQuantity(Math.min(product.stock, quantity + 1))
@@ -142,35 +157,25 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
               </button>
             </div>
 
-            <p className="text-[16px] text-white">
+            <p className="text-[16px] text-[#FCFCFC]">
               Stock : <span className="text-white">{product.stock}</span>
             </p>
           </div>
         </div>
 
-        <div className="mt-10 flex items-end justify-between gap-6">
+        <div className="mt-8 flex items-end justify-between gap-6">
           <p className="text-[18px] font-medium text-[#A3A3A3]">Subtotal</p>
-          <p className="text-[40px] font-medium leading-none tracking-[-0.04em] text-white">
+          <p className="text-[28px] font-medium leading-10 tracking-[-0.01em] text-white">
             ${subtotal}
           </p>
         </div>
 
-        <button className="mt-10 flex h-15 w-full items-center justify-center gap-3 rounded-lg border border-[#E58A3A] bg-transparent px-4 text-[18px] font-medium text-[#F59A41] transition hover:bg-[#2F2A24]">
+        <button
+          className="mt-8 flex h-15 w-full items-center justify-center gap-3 rounded-lg border border-[#E58A3A] bg-transparent px-4 text-[16px] leading-[26px] font-medium text-[#F59A41] transition hover:bg-[#2F2A24]"
+          onClick={handleAddToCart}
+        >
           Add to Cart
-          <svg
-            aria-hidden="true"
-            viewBox="0 0 24 24"
-            className="h-5 w-5"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.9"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <circle cx="9" cy="20" r="1" />
-            <circle cx="18" cy="20" r="1" />
-            <path d="M3 4h2l2.4 10.2a1 1 0 0 0 1 .8h9.9a1 1 0 0 0 1-.8L21 7H6" />
-          </svg>
+          <CartIcon className="w-6 h-6" />
         </button>
       </div>
     </div>
