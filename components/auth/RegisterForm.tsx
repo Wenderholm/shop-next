@@ -1,18 +1,18 @@
 "use client";
 
-import Link from "next/link";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
+import type { z } from "zod";
 import { registerFormSchema } from "@/schemas/register.schema";
 import RegisterSuccess from "./RegisterSuccess";
 import { useRegister } from "@/hooks/useRegister";
+import { useState } from "react";
+import ShowPasswordIcon from "../icons/ShowPasswordIcon";
 
 type RegisterFormData = z.infer<typeof registerFormSchema>;
 
 const inputBaseClass =
-  "mt-3 w-full rounded-xl border bg-[#252525] px-4 py-3 text-base text-white outline-none transition placeholder:text-[#9b9b9b]";
+  "w-full rounded-xl border bg-[#252525] px-4 py-3 text-base text-white outline-none transition placeholder:text-[#9b9b9b]";
 
 const inputStateClass = (hasError: boolean) =>
   hasError
@@ -32,7 +32,7 @@ export default function RegisterForm() {
   });
 
   const { registerUser, isRegistered, submitError } = useRegister();
-
+  const [showPassword, setShowPassword] = useState(false);
   const onSubmit = async (data: RegisterFormData) => {
     await registerUser(data);
   };
@@ -70,13 +70,14 @@ export default function RegisterForm() {
             <label htmlFor="firstName" className={labelClass}>
               First Name
             </label>
-
-            <input
-              id="firstName"
-              placeholder="Your first name"
-              className={`${inputBaseClass} ${inputStateClass(Boolean(errors.firstName))}`}
-              {...register("firstName")}
-            />
+            <div className="mt-3">
+              <input
+                id="firstName"
+                placeholder="Your first name"
+                className={`${inputBaseClass} ${inputStateClass(Boolean(errors.firstName))}`}
+                {...register("firstName")}
+              />
+            </div>
 
             {errors.firstName && (
               <p className={errorClass}>{errors.firstName.message}</p>
@@ -87,15 +88,15 @@ export default function RegisterForm() {
             <label htmlFor="email" className={labelClass}>
               Email
             </label>
-
-            <input
-              id="email"
-              type="email"
-              placeholder="Your Email"
-              className={`${inputBaseClass} ${inputStateClass(Boolean(errors.email))}`}
-              {...register("email")}
-            />
-
+            <div className="mt-3">
+              <input
+                id="email"
+                type="email"
+                placeholder="Your Email"
+                className={`${inputBaseClass} ${inputStateClass(Boolean(errors.email))}`}
+                {...register("email")}
+              />
+            </div>
             {errors.email && (
               <p className={errorClass}>{errors.email.message}</p>
             )}
@@ -105,15 +106,22 @@ export default function RegisterForm() {
             <label htmlFor="password" className={labelClass}>
               Password
             </label>
-
-            <input
-              id="password"
-              type="password"
-              placeholder="Password"
-              className={`${inputBaseClass} ${inputStateClass(Boolean(errors.password))}`}
-              {...register("password")}
-            />
-
+            <div className="relative mt-3">
+              <input
+                id="password"
+                type={showPassword ? "text" : "password"}
+                placeholder="Password"
+                className={`${inputBaseClass} ${inputStateClass(Boolean(errors.password))}`}
+                {...register("password")}
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-sm text-[#c4c4c4]"
+              >
+                {showPassword ? <ShowPasswordIcon /> : <ShowPasswordIcon />}
+              </button>
+            </div>
             <p
               className={`mt-2 text-sm ${errors.password ? "text-[#ff6b6b]" : "text-[#c4c4c4]"}`}
             >
@@ -126,15 +134,22 @@ export default function RegisterForm() {
             <label htmlFor="confirmPassword" className={labelClass}>
               Confirm Password
             </label>
-
-            <input
-              id="confirmPassword"
-              type="password"
-              placeholder="Confirm Password"
-              className={`${inputBaseClass} ${inputStateClass(Boolean(errors.confirmPassword))}`}
-              {...register("confirmPassword")}
-            />
-
+            <div className="relative mt-3">
+              <input
+                id="confirmPassword"
+                type={showPassword ? "text" : "password"}
+                placeholder="Confirm Password"
+                className={`${inputBaseClass} ${inputStateClass(Boolean(errors.confirmPassword))}`}
+                {...register("confirmPassword")}
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-sm text-[#c4c4c4]"
+              >
+                {showPassword ? <ShowPasswordIcon /> : <ShowPasswordIcon />}
+              </button>
+            </div>
             {errors.confirmPassword && (
               <p className={errorClass}>{errors.confirmPassword.message}</p>
             )}
@@ -144,21 +159,21 @@ export default function RegisterForm() {
             <label htmlFor="address" className={labelClass}>
               Country or region
             </label>
-
-            <select
-              id="address"
-              className={`${inputBaseClass} ${inputStateClass(Boolean(errors.address))} appearance-none pr-12`}
-              {...register("address")}
-            >
-              <option value="">Select your country</option>
-              <option value="Poland">Poland</option>
-              <option value="Germany">Germany</option>
-              <option value="France">France</option>
-              <option value="Spain">Spain</option>
-              <option value="Italy">Italy</option>
-              <option value="Netherlands">Netherlands</option>
-            </select>
-
+            <div className="mt-3">
+              <select
+                id="address"
+                className={`${inputBaseClass} ${inputStateClass(Boolean(errors.address))} appearance-none pr-12`}
+                {...register("address")}
+              >
+                <option value="">Select your country</option>
+                <option value="Poland">Poland</option>
+                <option value="Germany">Germany</option>
+                <option value="France">France</option>
+                <option value="Spain">Spain</option>
+                <option value="Italy">Italy</option>
+                <option value="Netherlands">Netherlands</option>
+              </select>
+            </div>
             {errors.address && (
               <p className={errorClass}>{errors.address.message}</p>
             )}

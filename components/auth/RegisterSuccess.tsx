@@ -1,36 +1,24 @@
 import Link from "next/link";
+import SuccessMark from "../icons/SuccessMark";
 
 export default function RegisterSuccess() {
   return (
     <div className="w-full max-w-4xl px-4 text-center text-white">
-      <div className="mx-auto flex h-34 w-34 items-center justify-center rounded-full border-[6px] border-[#79f2b0]">
-        <svg
-          viewBox="0 0 24 24"
-          aria-hidden="true"
-          className="h-16 w-16 text-[#79f2b0]"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <path d="M20 6 9 17l-5-5" />
-        </svg>
-      </div>
-
-      <h1 className="mt-16 text-6xl font-semibold text-[#f5f5f5]">
+      <SuccessMark className="mx-auto h-[75px] w-[75px]" />
+      <h1 className="mt-10 text-[44px] leading-[54px] font-bold tracking-[-0.01em] text-[#FCFCFC]">
         Thank you!
       </h1>
 
-      <p className="mt-8 text-3xl font-medium">
+      <p className="mt-4 text-[24px] leading-[36px] tracking-[-0.01em] font-medium text-[#FCFCFC]">
         You have successfully registered
       </p>
 
-      <p className="mx-auto mt-14 max-w-5xl text-xl leading-9 text-[#d2d2d2]">
-        Please check your e-mail for further information.
+      <p className="mx-auto mt-8 max-w-5xl font-[400] text-[18px] leading-9 text-[#E7E7E7]">
+        Please check your e-mail for further information. Let’s exploring our
+        products and enjoy many gifts.
       </p>
 
-      <p className="mt-12 text-xl text-[#d2d2d2]">
+      <p className="mt-[19px] text-[18px] leading-7 text-[#E7E7E7]">
         Having problem?{" "}
         <Link
           href="/contact"

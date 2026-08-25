@@ -1,8 +1,11 @@
-export default function SuccessMark() {
+interface SuccessMarkProps {
+  className?: string;
+}
+
+export default function SuccessMark({ className }: SuccessMarkProps) {
   return (
     <svg
-      width="25"
-      height="25"
+      className={className}
       viewBox="0 0 25 25"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

@@ -27,7 +27,7 @@ export default function CartNotification() {
       "
     >
       <div className="flex items-center gap-4">
-        <SuccessMark />
+        <SuccessMark className="w-[25px] h-[25px]" />
         <div className="w-full flex items-center justify-between">
           <span className="text-[#FCFCFC] text-[20px] leading-[30px] tracking-[-0.01em] ">
             Product Successfully Added

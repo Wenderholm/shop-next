@@ -1,8 +1,19 @@
+"use client";
+
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-export default function Navigation() {
+type NavigationProps = {
+  isAuthenticated: boolean;
+};
+
+export default function Navigation({ isAuthenticated }: NavigationProps) {
   const pathname = usePathname();
+
+  if (!isAuthenticated) {
+    return null;
+  }
+
   return (
     <nav className="flex flex-row gap-12 font-semibold text-[16px] leading-[26px] mb-10 ">
       <Link
