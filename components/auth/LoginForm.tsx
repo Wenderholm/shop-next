@@ -34,7 +34,6 @@ export default function LoginForm() {
     register,
     handleSubmit,
     setError,
-    clearErrors,
     formState: { errors, isSubmitting },
   } = useForm<LoginFormData>({
     resolver: zodResolver(loginFormSchema),
@@ -90,7 +89,7 @@ export default function LoginForm() {
       return;
     }
 
-    router.replace("/");
+    router.replace("/?login=success");
     router.refresh();
   };
 

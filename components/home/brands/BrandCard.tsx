@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 import { Brand } from "@/types/brand";
 import LogitechLogo from "@/components/icons/logos/LogitechLogo";
 import RazerLogo from "@/components/icons/logos/RazerLogo";

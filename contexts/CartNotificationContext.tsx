@@ -23,7 +23,7 @@ export function CartNotificationProvider({
 
     setTimeout(() => {
       setIsOpen(false);
-    }, 100000);
+    }, 2000);
   };
 
   const hideNotification = () => {

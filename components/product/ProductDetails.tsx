@@ -7,6 +7,7 @@ import SuccessMark from "../icons/SuccessMark";
 import CheckIcon from "../icons/Check";
 import CartIcon from "../icons/CartIcon";
 import { useCartNotification } from "@/contexts/CartNotificationContext";
+import { useCart } from "@/contexts/CartContext";
 
 interface ProductDetailsProps {
   product: Product;
@@ -25,16 +26,17 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
   });
 
   const { showNotification } = useCartNotification();
+  const { addToCart } = useCart();
   const [quantity, setQuantity] = useState(1);
   const [isShowDescription, setIsShowDescription] = useState(false);
   const [selectedColor, setSelectedColor] = useState("white");
   const subtotal = Number((product.price * quantity).toFixed(2));
 
-  const handleAddToCart = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleAddToCart = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     e.stopPropagation();
 
-    showNotification();
+    if (await addToCart(product, quantity)) showNotification();
   };
 
   return (

@@ -1,7 +1,7 @@
-import CartIcon from "@/components/icons/CartIcon";
 import Link from "next/link";
 import UserIcon from "@/components/icons/UserIcon";
 import LogoutButton from "@/components/LogoutButton";
+import CartLink from "@/components/layout/CartLink";
 
 type HeaderActionsProps = {
   isAuthenticated: boolean;
@@ -42,9 +42,7 @@ export default function HeaderActions({
         </div>
       </div>
       <LogoutButton />
-      <button type="button" aria-label="Open cart">
-        <CartIcon className="w-6 h-6" />
-      </button>
+      <CartLink />
       <Link href="/profile">
         <UserIcon className="w-10 h-10" />
       </Link>

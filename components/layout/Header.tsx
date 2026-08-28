@@ -2,6 +2,7 @@ import Link from "next/link";
 import { auth } from "@/auth";
 import Navigation from "@/components/layout/Navigation";
 import HeaderActions from "@/components/layout/HeaderActions";
+import LoginSuccessNotification from "@/components/layout/LoginSuccessNotification";
 
 export default async function Header() {
   const session = await auth();
@@ -18,6 +19,9 @@ export default async function Header() {
             Hub
           </p>
         </Link>
+
+        <LoginSuccessNotification />
+
         <HeaderActions isAuthenticated={isAuthenticated} userName={userName} />
       </div>
       <Navigation isAuthenticated={isAuthenticated} />

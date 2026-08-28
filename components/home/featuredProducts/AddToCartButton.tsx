@@ -1,18 +1,24 @@
 import { Product } from "@/types/product";
 import CartIcon from "../../icons/CartIcon";
 import { useCartNotification } from "@/contexts/CartNotificationContext";
+import { useCart } from "@/contexts/CartContext";
 interface AddToCartButtonProps {
   product: Product;
 }
 
 export default function AddToCartButton({ product }: AddToCartButtonProps) {
   const { showNotification } = useCartNotification();
+  const { addToCart } = useCart();
 
-  const handleAddToCart = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleAddToCart = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     e.stopPropagation();
 
-    showNotification();
+    const wasAdded = await addToCart(product);
+
+    if (wasAdded) {
+      showNotification();
+    }
   };
   return (
     <>
