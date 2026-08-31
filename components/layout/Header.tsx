@@ -6,15 +6,14 @@ import LoginSuccessNotification from "@/components/layout/LoginSuccessNotificati
 
 export default async function Header() {
   const session = await auth();
-  const userName =
-    session?.user?.name?.trim() || session?.user?.email || "User";
+
   const isAuthenticated = Boolean(session?.user);
 
   return (
     <header className="flex flex-col justify-between mt-8 mb-8 ml-10 mr-10 border-b border-[#383B42]">
-      <div className="flex flex-row justify-between items-center mb-10">
+      <div className="mb-10 flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
         <Link href="/">
-          <p className="font-semibold text-[32px] leading-[44px] tracking-[-0.01em]">
+          <p className="font-semibold text-[32px] leading-11 tracking-[-0.01em]">
             <span className=" text-orange ">Devstock</span>
             Hub
           </p>
@@ -22,7 +21,7 @@ export default async function Header() {
 
         <LoginSuccessNotification />
 
-        <HeaderActions isAuthenticated={isAuthenticated} userName={userName} />
+        <HeaderActions isAuthenticated={isAuthenticated} />
       </div>
       <Navigation isAuthenticated={isAuthenticated} />
     </header>

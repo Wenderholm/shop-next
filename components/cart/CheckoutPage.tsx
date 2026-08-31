@@ -37,6 +37,8 @@ const provinceOptions = ["Mazovia", "Pomerania", "Silesia", "Lesser Poland"];
 const cityOptions = ["Warsaw", "Gdansk", "Katowice", "Krakow"];
 const postalCodeOptions = ["00-001", "80-001", "40-001", "30-001"];
 
+const checkoutEntryClass =
+  "flex items-start justify-between  font-medium text-[16px] leading-7 tracking-normal align-middle";
 export default function CheckoutPage({ userCountry }: CheckoutPageProps) {
   const { items, loading, loadCart } = useCartItems();
   const [addressMode, setAddressMode] = useState<AddressMode>("existing");
@@ -151,8 +153,10 @@ export default function CheckoutPage({ userCountry }: CheckoutPageProps) {
     );
   }
 
+  const labelStyle =
+    "inline-block rounded-md bg-[#E5610A] px-[10px] py-[6px] text-sm leading-6 font-medium text-[#FDEDD7]";
   return (
-    <main className="px-6 pb-20 pt-4 text-white lg:px-10">
+    <main className="px-6 pb-12 pt-4 text-white lg:px-10">
       <div className="mb-14 flex flex-wrap items-center gap-3 border-t border-[#383B42] pt-8 text-sm text-[#B0B0B0] lg:text-[16px]">
         <Link href="/" className="hover:text-white">
           Home
@@ -178,89 +182,82 @@ export default function CheckoutPage({ userCountry }: CheckoutPageProps) {
           </Link>
         </div>
       ) : (
-        <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_224px] xl:grid-cols-[minmax(0,1fr)_260px]">
+        <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_423px] xl:grid-cols-[minmax(0,1fr)_423px]">
           <section className="space-y-9">
-            <div>
+            <div className="mb-10">
               <h1 className="text-[28px] font-medium leading-9">Your Order</h1>
               <div className="mt-5 space-y-5">
                 {items.map((item) => {
                   const isProtected = protectedItems.includes(item.id);
 
                   return (
-                    <article
+                    <div
                       key={item.id}
                       className="rounded-md border border-[#353535] bg-[#262626]"
                     >
-                      <div className="flex flex-col gap-5 p-4 sm:flex-row sm:items-start sm:justify-between sm:p-5">
+                      <div className="flex min-w-0 flex-1 justify-between rounded-lg border border-[#353535] bg-[#262626] p-5">
                         <div className="flex min-w-0 gap-4">
-                          <div className="flex h-23 w-23 items-center justify-center rounded-md bg-white p-3">
-                            <Image
-                              src={item.product.imageUrls[0]}
-                              alt={item.product.name}
-                              width={72}
-                              height={72}
-                              className="h-auto w-auto object-contain"
-                            />
-                          </div>
+                          <Image
+                            src={item.product.imageUrls[0]}
+                            alt={item.product.name}
+                            width={172}
+                            height={138}
+                            className="h-34 w-40 rounded-md bg-white object-contain p-2"
+                          />
 
-                          <div className="min-w-0">
-                            <h2 className="text-xl font-medium leading-7 text-[#FCFCFC]">
-                              {item.product.name}
-                            </h2>
-                            <span className="mt-3 inline-flex rounded-md bg-[#E5610A] px-3 py-1 text-xs font-medium text-[#FDEDD7]">
-                              {item.product.category.name}
-                            </span>
+                          <div className="min-w-0 flex-1">
+                            <div>
+                              <h2 className="text-xl leading-[30px] font-medium tracking-[-0.01em] text-[#FCFCFC]">
+                                {item.product.name}
+                              </h2>
+
+                              <span className={` mt-3 ${labelStyle}`}>
+                                {item.product.category.name}
+                              </span>
+                            </div>
                             <p className="mt-4 text-[30px] font-semibold leading-10 tracking-[-0.01em] text-[#FCFCFC]">
                               ${Number(item.priceAtPurchase).toFixed(2)}
                             </p>
                           </div>
                         </div>
 
-                        <div className="flex flex-col items-start gap-4 sm:items-end">
-                          <button
-                            type="button"
-                            onClick={() => removeItem(item.id)}
-                            className="rounded-md transition hover:opacity-80"
-                            aria-label={`Remove ${item.product.name}`}
-                          >
-                            <Bin />
-                          </button>
-
-                          <div className="flex items-center gap-4 text-sm text-[#E5610A]">
-                            <button type="button">Write Note</button>
-                            <span className="text-[#4B4B4B]">|</span>
-                            <div className="flex items-center rounded-md border border-[#6B7280] px-3 py-2 text-white">
-                              <button
-                                type="button"
-                                onClick={() =>
-                                  updateQuantity(item, item.quantity - 1)
-                                }
-                                className="h-6 w-6 text-xl leading-none"
-                              >
-                                −
-                              </button>
-                              <span className="w-10 text-center text-sm">
-                                {item.quantity}
-                              </span>
-                              <button
-                                type="button"
-                                onClick={() =>
-                                  updateQuantity(item, item.quantity + 1)
-                                }
-                                className="h-6 w-6 text-xl leading-none"
-                              >
-                                +
-                              </button>
-                            </div>
+                        {/* <div className="flex flex-col items-start justify-between sm:items-end"> */}
+                        <div className="flex items-end gap-6 text-sm text-[#E5610A]">
+                          <span className="inline-block text-[16px] leading-6.5 text-[#F29145] border-r py-2 pr-6 pl-2 border-[#D4D4D4]">
+                            Write Note
+                          </span>
+                          <div className="flex items-center rounded-md border border-[#6B7280] px-3 py-2 text-white">
+                            <button
+                              type="button"
+                              onClick={() =>
+                                updateQuantity(item, item.quantity - 1)
+                              }
+                              className="h-6 w-6 text-xl leading-none"
+                            >
+                              −
+                            </button>
+                            <span className="w-10 text-center text-sm">
+                              {item.quantity}
+                            </span>
+                            <button
+                              type="button"
+                              onClick={() =>
+                                updateQuantity(item, item.quantity + 1)
+                              }
+                              className="h-6 w-6 text-xl leading-none"
+                            >
+                              +
+                            </button>
                           </div>
                         </div>
+                        {/* </div> */}
                       </div>
 
-                      <div className="flex flex-col gap-3 border-t border-[#383B42] px-4 py-4 sm:flex-row sm:items-start sm:justify-between sm:px-5">
+                      <div className="flex flex-col gap-3 border-t border-[#383B42] p-6 sm:flex-row sm:items-start sm:justify-between sm:px-6">
                         <button
                           type="button"
                           onClick={() => toggleProtection(item.id)}
-                          className="flex items-start gap-3 text-left"
+                          className="flex items-start gap-4 text-left"
                         >
                           <span
                             className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-md ${
@@ -274,37 +271,39 @@ export default function CheckoutPage({ userCountry }: CheckoutPageProps) {
                             ) : null}
                           </span>
                           <span>
-                            <span className="block text-sm font-medium text-[#FCFCFC]">
+                            <span className="block text-[16px] leading-[26px] font-medium text-[#FCFCFC]">
                               Product Protection
                             </span>
-                            <span className="mt-1 block text-xs leading-5 text-[#9E9E9E]">
+                            <span className="mt-1 block text-[14px] leading-6 text-[#E7E7E7]">
                               The claim process is easy and instant, valid for 6
                               months
                             </span>
                           </span>
                         </button>
 
-                        <span className="pl-8 text-sm font-medium text-[#FCFCFC] sm:pl-0">
+                        <span className="pl-8 text-[18px] leading-[28px] font-medium text-[#FCFCFC] sm:pl-0">
                           $1
                         </span>
                       </div>
-                    </article>
+                    </div>
                   );
                 })}
               </div>
             </div>
 
             <section>
-              <h2 className="text-[28px] font-medium leading-9">Address</h2>
-              <div className="mt-5 rounded-md border border-[#353535] bg-[#262626] p-4 sm:p-5">
+              <h2 className="font-medium text-2xl leading-9 tracking-[-0.01em] text-[#FCFCFC]">
+                Address
+              </h2>
+              <div className="mt-4 rounded-md border border-[#383B42] bg-[#262626] p-4 sm:p-6">
                 <div className="grid grid-cols-2 border-b border-[#383B42] text-sm font-medium">
                   <button
                     type="button"
                     onClick={() => setAddressMode("existing")}
-                    className={`pb-4 transition ${
+                    className={`text-[18px] font-semibold leading-7 transition pb-3 ${
                       addressMode === "existing"
-                        ? "border-b-2 border-orange text-orange"
-                        : "text-[#8E8E8E]"
+                        ? "border-b-2 border-[#F29145] text-[#F29145]"
+                        : "text-[#B0B0B0]"
                     }`}
                   >
                     Existing Address
@@ -312,10 +311,10 @@ export default function CheckoutPage({ userCountry }: CheckoutPageProps) {
                   <button
                     type="button"
                     onClick={() => setAddressMode("new")}
-                    className={`pb-4 transition ${
+                    className={`text-[18px] font-semibold leading-7 pb-3 transition ${
                       addressMode === "new"
-                        ? "border-b-2 border-orange text-orange"
-                        : "text-[#8E8E8E]"
+                        ? "border-b-2 border-[#F29145] text-[#F29145]"
+                        : "text-[#B0B0B0]"
                     }`}
                   >
                     New Address
@@ -323,35 +322,51 @@ export default function CheckoutPage({ userCountry }: CheckoutPageProps) {
                 </div>
 
                 {addressMode === "existing" ? (
-                  <div className="pt-6 text-[#D4D4D4]">
-                    <div className="mb-6">
-                      <p className="text-xs text-[#9E9E9E]">Address</p>
-                      <span className="mt-2 inline-flex rounded-md bg-[#E5610A] px-3 py-1 text-xs font-medium text-[#FDEDD7]">
-                        Main Address
-                      </span>
-                      <p className="mt-4 text-lg font-medium text-[#FCFCFC]">
+                  <div className="pt-8 text-[#D4D4D4]">
+                    <div className="flex mb-3 gap-4">
+                      <p className="flex items-center justify-center text-[#E7E7E7] font-medium text-base leading-[26px] tracking-normal">
+                        Address
+                      </p>
+                      <span className={`${labelStyle}`}>Main Address</span>
+                    </div>
+                    <div>
+                      <p className="text-[18px] leading-[28px] font-medium text-[#FCFCFC]">
                         Bangalau Road No 23, RT 4/RW 6, Kinajaya
                       </p>
                     </div>
 
-                    <div className="grid gap-6 text-sm sm:grid-cols-4">
+                    <div className="flex justify-between text-sm mt-10">
                       <div>
-                        <p className="text-xs text-[#9E9E9E]">Country</p>
-                        <p className="mt-2 text-base text-[#FCFCFC]">
+                        <p className="font-medium text-base leading-[26px] tracking-normal text-[#E7E7E7]">
+                          Country
+                        </p>
+                        <p className="mt-1 text-base text-[#FCFCFC]">
                           {userCountry || "Poland"}
                         </p>
                       </div>
                       <div>
-                        <p className="text-xs text-[#9E9E9E]">Province</p>
-                        <p className="mt-2 text-base text-[#FCFCFC]">Jakarta</p>
+                        <p className="font-medium text-base leading-[26px] tracking-normal text-[#E7E7E7]">
+                          Province
+                        </p>
+                        <p className="mt-1 font-medium text-lg leading-7 tracking-normal text-[#FCFCFC]">
+                          Jakarta
+                        </p>
                       </div>
                       <div>
-                        <p className="text-xs text-[#9E9E9E]">City</p>
-                        <p className="mt-2 text-base text-[#FCFCFC]">Jakarta</p>
+                        <p className="font-medium text-base leading-[26px] tracking-normal text-[#E7E7E7]">
+                          City
+                        </p>
+                        <p className="mt-1 font-medium text-lg leading-7 tracking-normal text-[#FCFCFC]">
+                          Jakarta
+                        </p>
                       </div>
                       <div>
-                        <p className="text-xs text-[#9E9E9E]">Postal Code</p>
-                        <p className="mt-2 text-base text-[#FCFCFC]">12819</p>
+                        <p className="font-medium text-base leading-[26px] tracking-normal text-[#E7E7E7]">
+                          Postal Code
+                        </p>
+                        <p className="mt-1 font-medium text-lg leading-7 tracking-normal text-[#FCFCFC]">
+                          12819
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -455,58 +470,71 @@ export default function CheckoutPage({ userCountry }: CheckoutPageProps) {
             </section>
 
             <section>
-              <h2 className="text-[28px] font-medium leading-9">Shipping</h2>
-              <div className="mt-5 flex items-center gap-3 rounded-md border border-[#353535] bg-[#262626] px-4 py-5 text-[#D4D4D4] sm:px-5">
+              <h2 className="font-medium text-2xl leading-9 tracking-[-0.01em] ">
+                Shipping
+              </h2>
+
+              <div className="mt-4 flex items-center gap-4 rounded-md border border-[#383B42] bg-[#262626] px-[24px] py-[26px] text-[#D4D4D4] sm:p-6 ">
                 <GreenShield />
-                <span>NexusHub Courier</span>
+                <span className="font-medium text-lg leading-7 tracking-normal text-[#FCFCFC]">
+                  NexusHub Courier
+                </span>
               </div>
             </section>
 
             <section>
-              <h2 className="text-[28px] font-medium leading-9">
+              <h2 className="font-medium text-2xl leading-9 tracking-[-0.01em]">
                 Payment Method
               </h2>
-              <div className="mt-5 flex items-center gap-4 rounded-md border border-[#353535] bg-[#262626] px-4 py-3 sm:px-5">
+              <div className="mt-4 flex items-center gap-4 rounded-md border border-[#383B42] bg-[#262626] px-5 py-5 sm:px-6">
                 <div className="h-8.5 w-13.5 shrink-0">
                   <ApplePayIcon />
                 </div>
-                <span className="text-[#FCFCFC]">Apple Pay</span>
+                <span className="font-medium text-lg leading-7 tracking-normal text-[#FCFCFC]">
+                  Apple Pay
+                </span>
               </div>
             </section>
           </section>
 
-          <aside className="h-fit rounded-md border border-[#353535] bg-[#262626] p-4 sm:p-5">
-            <h2 className="text-lg font-medium">Total Product</h2>
-            <div className="mt-5 space-y-4 border-b border-[#383B42] pb-5 text-sm text-[#D4D4D4]">
-              <div className="flex items-start justify-between gap-4">
+          <aside className="h-fit rounded-md border border-[#353535] bg-[#262626] p-4 sm:py-[36px] sm:px-[24px]">
+            <h2 className="font-medium text-lg leading-7 tracking-normal align-middle text-[#FCFCFC]">
+              Total Product
+            </h2>
+            <div className="mt-5 space-y-4 border-b border-[#383B42] pb-6 text-sm text-[#D4D4D4]">
+              <div className={checkoutEntryClass}>
                 <span>Total Product Price ({itemCount} Item)</span>
                 <span>${subtotal.toFixed(2)}</span>
               </div>
-              <div className="flex items-start justify-between gap-4">
+              <div className={checkoutEntryClass}>
                 <span>Total Product Protection</span>
                 <span>${protectionTotal.toFixed(2)}</span>
               </div>
-              <div className="flex items-start justify-between gap-4">
+              <div className={checkoutEntryClass}>
                 <span>Total Shipping Price</span>
                 <span>${shippingPrice.toFixed(2)}</span>
               </div>
-              <div className="flex items-start justify-between gap-4">
+              <div className={checkoutEntryClass}>
                 <span>Shipping Insurance</span>
                 <span>${shippingInsurance.toFixed(2)}</span>
               </div>
             </div>
 
-            <div className="mt-6 space-y-4 border-b border-[#383B42] pb-5 text-sm text-[#D4D4D4]">
-              <p className="font-medium text-[#FCFCFC]">Transaction Fees</p>
-              <div className="flex items-start justify-between gap-4">
+            <div className="mt-6 space-y-4 border-b border-[#383B42] pb-6 text-sm text-[#D4D4D4]">
+              <p className="font-medium text-lg leading-7 tracking-normal align-middle text-[#FCFCFC]">
+                Transaction Fees
+              </p>
+              <div className={checkoutEntryClass}>
                 <span>Service Fees</span>
                 <span>${serviceFee.toFixed(2)}</span>
               </div>
             </div>
 
             <div className="mt-6 flex items-center justify-between gap-4 text-xl font-medium">
-              <span>Grand total</span>
-              <span className="text-[36px] leading-10 tracking-[-0.01em]">
+              <span className="font-medium text-lg leading-7 tracking-normal align-middle text-[#FCFCFC]">
+                Grand total
+              </span>
+              <span className="font-medium text-lg leading-7 tracking-normal align-middle text-[#FCFCFC]">
                 ${grandTotal.toFixed(2)}
               </span>
             </div>

@@ -12,15 +12,15 @@ import ShowPasswordIcon from "../icons/ShowPasswordIcon";
 type RegisterFormData = z.infer<typeof registerFormSchema>;
 
 const inputBaseClass =
-  "w-full rounded-xl border bg-[#252525] px-4 py-3 text-base text-white outline-none transition placeholder:text-[#9b9b9b]";
+  " w-full leading-[26px] font-normal rounded-[6px] border bg-[#252525] outline-none px-5 py-[14px] text-base text-[#FCFCFC]  transition placeholder:text-[#9b9b9b]";
 
 const inputStateClass = (hasError: boolean) =>
   hasError
-    ? "border-red-500 focus:border-red-500"
+    ? "border-[#DC2626] focus:border-[#DC2626]"
     : "border-[#4a4f5f] focus:border-[#f29145]";
 
 const labelClass = "text-sm font-medium text-[#f3f3f3]";
-const errorClass = "mt-2 text-sm text-[#ff6b6b]";
+const errorClass = "mt-2 text-[14px] text-[#F87171]";
 
 export default function RegisterForm() {
   const {

@@ -5,25 +5,21 @@ import CartLink from "@/components/layout/CartLink";
 
 type HeaderActionsProps = {
   isAuthenticated: boolean;
-  userName: string;
 };
 
-export default function HeaderActions({
-  isAuthenticated,
-  userName,
-}: HeaderActionsProps) {
+export default function HeaderActions({ isAuthenticated }: HeaderActionsProps) {
   if (!isAuthenticated) {
     return (
-      <div className="flex flex-row items-center gap-4">
+      <div className="flex w-full flex-col gap-3 md:w-auto md:flex-row md:items-center md:gap-4">
         <Link
           href="/login"
-          className="rounded-xl border border-orange bg-orange px-5 py-3 font-semibold text-[16px] leading-[26px] text-[#262626] transition-colors hover:border-orange hover:text-white"
+          className="w-full rounded-xl border border-orange bg-orange px-5 py-3 text-center font-semibold text-[16px] leading-6.5 text-[#262626] transition-colors hover:border-orange hover:text-white md:w-auto"
         >
           Sign In
         </Link>
         <Link
           href="/register"
-          className="rounded-xl border border-orange bg-orange px-5 py-3 font-semibold text-[16px] leading-[26px] text-[#262626] transition-colors hover:border-orange hover:text-white"
+          className="w-full rounded-xl border border-orange bg-orange px-5 py-3 text-center font-semibold text-[16px] leading-6.5 text-[#262626] transition-colors hover:border-orange hover:text-white md:w-auto"
         >
           Create Account
         </Link>
@@ -33,14 +29,6 @@ export default function HeaderActions({
 
   return (
     <div className="flex flex-row items-center gap-6">
-      <div className=" flex gap-5 justify-center align-middle text-right">
-        <div>
-          <p className="flex justify-centertext-sm text-[#B0B0B0]">Welcome</p>
-        </div>
-        <div>
-          <p className="font-semibold text-white">{userName.toUpperCase()}</p>
-        </div>
-      </div>
       <LogoutButton />
       <CartLink />
       <Link href="/profile">

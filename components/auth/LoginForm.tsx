@@ -9,18 +9,18 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import { loginFormSchema, type LoginFormData } from "@/schemas/login.schema";
 import CheckIcon from "../icons/Check";
-
+// font-normal   tracking-normal
 const inputBaseClass =
-  "mt-4 w-full rounded-[6px] border bg-[#252525] px-5 py-[14px] text-base text-white outline-none transition placeholder:text-[#9b9b9b]";
+  "mt-4 w-full leading-[26px] font-normal rounded-[6px] border bg-[#252525] px-5 py-[14px] outline-none text-base text-[#FCFCFC]  transition placeholder:text-[#9b9b9b]";
 
 const inputStateClass = (hasError: boolean) =>
   hasError
-    ? "border-red-500 focus:border-red-500"
+    ? "border-[#DC2626] focus:border-[#DC2626]"
     : "border-[#4a4f5f] focus:border-[#f29145]";
 
 const labelClass = "text-[18px] leading-[28px] font-medium text-[#FCFCFC]";
 
-const errorClass = "mt-2 text-sm text-[#ff6b6b]";
+const errorClass = "mt-2 text-[14px] text-[#F87171]";
 
 export default function LoginForm() {
   const router = useRouter();
@@ -123,7 +123,7 @@ export default function LoginForm() {
         >
           {/* BŁĄD Z API / NEXTAUTH */}
           {submitError && (
-            <p className="rounded-xl border border-red-500/40 bg-red-500/10 px-4 py-3 text-sm text-[#ff8b8b]">
+            <p className="rounded-xl border border-[#bedc26] px-4 py-3 text-sm text-[#F87171]">
               {submitError}
             </p>
           )}

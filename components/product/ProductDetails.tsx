@@ -106,7 +106,7 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
             <button
               type="button"
               aria-label="Selected white color"
-              className="flex h-[54px] w-[54px] items-center justify-center rounded-lg border border-[#F3F3F3] bg-[#F8F8F8] text-[#1D1D1D]"
+              className="flex h-13.5 w-13.5 items-center justify-center rounded-lg border border-[#F3F3F3] bg-[#F8F8F8] text-[#1D1D1D]"
               onClick={() => setSelectedColor("white")}
             >
               {selectedColor === "white" && <CheckIcon className="w-6 h-6" />}
@@ -115,7 +115,7 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
             <button
               type="button"
               aria-label="Alternate dark color"
-              className="flex h-[54px] w-[54px] items-center justify-center rounded-lg border border-[#383B42] bg-[#222327]"
+              className="flex h-13.5 w-13.5 items-center justify-center rounded-lg border border-[#383B42] bg-[#222327]"
               onClick={() => setSelectedColor("dark")}
             >
               {selectedColor === "dark" && (

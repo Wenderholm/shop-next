@@ -41,7 +41,7 @@ export default function CategoryCarousel({
     border-[#383B42] 
     overflow-hidden"
       >
-        <div className=" max-w-[433px] flex-col ml-[120px]">
+        <div className=" max-w-[433px] flex-col  sm:ml-[120px]">
           <h2 className="font-medium text-[32px]  leading-11 tracking-[-0.32px] text-[#FCFCFC] mb-6 pt-[132px]">
             {category.name}
           </h2>
@@ -74,8 +74,8 @@ export default function CategoryCarousel({
         <div
           className={
             category.name === "Mouse"
-              ? "absolute inset-y-[-250px] right-[250px]"
-              : "absolute right-[120px] top-1/2 -translate-y-1/2"
+              ? "hidden md:absolute md:-inset-y-62.5 md:right-[clamp(120px,18vw,250px)] md:block md:w-[clamp(160px,24vw,443px)]"
+              : "hidden md:absolute md:right-[clamp(24px,8vw,120px)] md:top-1/2 md:block md:w-[clamp(160px,28vw,443px)] md:-translate-y-1/2"
           }
         >
           <Image
@@ -83,7 +83,9 @@ export default function CategoryCarousel({
             alt={category.name}
             width={443}
             height={853}
-            className={category.name === "Mouse" ? "rotate-[-34.55deg]" : ""}
+            className={`h-auto w-full ${
+              category.name === "Mouse" ? "rotate-[-34.55deg]" : ""
+            }`}
           />
         </div>
         <button
