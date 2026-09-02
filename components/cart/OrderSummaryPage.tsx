@@ -15,7 +15,7 @@ interface OrderSummaryPageProps {
   order: {
     id: number;
     createdAt: Date;
-    totalAmount: string | number;
+    totalAmount: string;
     orderItems: Array<{
       id: number;
       quantity: number;
@@ -55,35 +55,39 @@ export default function OrderSummaryPage({ order }: OrderSummaryPageProps) {
   return (
     <main className="px-6 pb-20 pt-6 text-white lg:px-10">
       <div className="mx-auto w-full max-w-170 rounded-md border border-[#353535] bg-[#262626] p-4 sm:p-6">
-        <SuccessMark className="mx-auto h-13.5 w-13.5" />
+        <SuccessMark className="mx-auto h-[60px] w-[60px]" />
 
-        <h1 className="mt-5 text-center text-[34px] font-medium leading-10 text-[#FCFCFC]">
+        <h1 className="mt-5 text-center text-[28px] font-medium leading-10 tracking-[-0.01em] text-[#FCFCFC]">
           Thanks for Your Order!
         </h1>
-        <p className="mt-3 text-center text-sm text-[#D4D4D4]">
+        <p className="mt-6 text-center text-[16px] leading-[26px] text-[#FCFCFC]">
           {invoiceNumber}
         </p>
 
-        <section className="mt-8 space-y-5 text-sm text-[#D4D4D4]">
+        <section className="mt-6 ">
           <div className="border-b border-[#383B42] pb-5">
-            <p className="text-[#FCFCFC]">Transaction Date</p>
-            <p className="mt-3">{formattedDate}</p>
+            <p className="text-[18px] leading-[28px] text-[#FCFCFC]">
+              Transaction Date
+            </p>
+            <p className="mt-3 text-[16px] leading-[26px] text-[#E7E7E7]">
+              {formattedDate}
+            </p>
           </div>
 
           <div className="border-b border-[#383B42] pb-5">
-            <p className="text-[#FCFCFC]">Payment Method</p>
+            <p className="text-[18px] leading-[28px] text-[#FCFCFC]">
+              Payment Method
+            </p>
             <div className="mt-3 flex items-center gap-3">
-              <div className="h-7 w-11 shrink-0">
-                <ApplePayIcon />
-              </div>
               <span>Apple Pay</span>
             </div>
           </div>
 
           <div className="border-b border-[#383B42] pb-5">
-            <p className="text-[#FCFCFC]">Shipping Method</p>
+            <p className="text-[18px] leading-[28px] text-[#FCFCFC]">
+              Shipping Method
+            </p>
             <div className="mt-3 flex items-center gap-3">
-              <GreenShield />
               <span>NexusHub Courier</span>
             </div>
           </div>

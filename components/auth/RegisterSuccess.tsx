@@ -9,7 +9,7 @@ export default function RegisterSuccess() {
         Thank you!
       </h1>
 
-      <p className="mt-4 text-[24px] leading-[36px] tracking-[-0.01em] font-medium text-[#FCFCFC]">
+      <p className="mt-2 text-[24px] leading-[36px] tracking-[-0.01em] font-medium text-[#FCFCFC]">
         You have successfully registered
       </p>
 

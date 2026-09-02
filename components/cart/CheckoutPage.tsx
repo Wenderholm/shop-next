@@ -1,4 +1,6 @@
 "use client";
+import React from "react";
+import SelectArrow from "../icons/SelectArrow";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -6,7 +8,6 @@ import { useRouter } from "next/navigation";
 import { useMemo, useState } from "react";
 
 import ApplePayIcon from "@/components/icons/paymentMethod/ApplePayIcon";
-import Bin from "@/components/icons/Bin";
 import CheckIcon from "@/components/icons/Check";
 import GreenShield from "@/components/icons/GreenShield";
 import { useCart } from "@/contexts/CartContext";
@@ -39,16 +40,16 @@ const postalCodeOptions = ["00-001", "80-001", "40-001", "30-001"];
 
 const checkoutEntryClass =
   "flex items-start justify-between  font-medium text-[16px] leading-7 tracking-normal align-middle";
+const selectClass =
+  "w-full appearance-none rounded-md border border-[#616674] bg-transparent px-4 py-[14px] pr-12 font-normal text-base leading-[26px] tracking-normal text-[#FCFCFC] outline-none";
 export default function CheckoutPage({ userCountry }: CheckoutPageProps) {
   const { items, loading, loadCart } = useCartItems();
   const [addressMode, setAddressMode] = useState<AddressMode>("existing");
   const [protectedItems, setProtectedItems] = useState<number[]>([]);
-  const [newAddressCountry, setNewAddressCountry] = useState(
-    countryOptions.includes(userCountry) ? userCountry : countryOptions[0],
-  );
-  const [province, setProvince] = useState(provinceOptions[0]);
-  const [city, setCity] = useState(cityOptions[0]);
-  const [postalCode, setPostalCode] = useState(postalCodeOptions[0]);
+  const [newAddressCountry, setNewAddressCountry] = useState("");
+  const [province, setProvince] = useState("");
+  const [city, setCity] = useState("");
+  const [postalCode, setPostalCode] = useState("");
   const [streetAddress, setStreetAddress] = useState("");
   const [isMainAddress, setIsMainAddress] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -65,18 +66,6 @@ export default function CheckoutPage({ userCountry }: CheckoutPageProps) {
       body: JSON.stringify({ itemId: item.id, quantity }),
     });
 
-    await loadCart();
-    await refreshCart();
-  };
-
-  const removeItem = async (itemId: number) => {
-    await fetch("/api/orders", {
-      method: "DELETE",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ itemId }),
-    });
-
-    setProtectedItems((current) => current.filter((id) => id !== itemId));
     await loadCart();
     await refreshCart();
   };
@@ -372,80 +361,110 @@ export default function CheckoutPage({ userCountry }: CheckoutPageProps) {
                   </div>
                 ) : (
                   <div className="space-y-4 pt-6">
-                    <div className="grid gap-4 sm:grid-cols-2">
-                      <select
-                        value={newAddressCountry}
-                        onChange={(event) =>
-                          setNewAddressCountry(event.target.value)
-                        }
-                        className="rounded-md border border-[#4B4B4B] bg-transparent px-4 py-3 text-sm text-[#FCFCFC] outline-none"
-                      >
-                        {countryOptions.map((country) => (
-                          <option
-                            key={country}
-                            value={country}
-                            className="bg-[#262626]"
-                          >
-                            {country}
+                    <div className="grid gap-8 sm:grid-cols-2 mb-8">
+                      <div className="relative w-full">
+                        <select
+                          value={newAddressCountry}
+                          onChange={(event) =>
+                            setNewAddressCountry(event.target.value)
+                          }
+                          className={selectClass}
+                        >
+                          <option value="" disabled>
+                            Country
                           </option>
-                        ))}
-                      </select>
+                          {countryOptions.map((country) => (
+                            <option
+                              key={country}
+                              value={country}
+                              className="bg-[#262626]"
+                            >
+                              {country}
+                            </option>
+                          ))}
+                        </select>
 
-                      <select
-                        value={province}
-                        onChange={(event) => setProvince(event.target.value)}
-                        className="rounded-md border border-[#4B4B4B] bg-transparent px-4 py-3 text-sm text-[#FCFCFC] outline-none"
-                      >
-                        {provinceOptions.map((option) => (
-                          <option
-                            key={option}
-                            value={option}
-                            className="bg-[#262626]"
-                          >
-                            {option}
-                          </option>
-                        ))}
-                      </select>
+                        <SelectArrow className="pointer-events-none absolute top-1/2 right-4 -translate-y-1/2 text-white" />
+                      </div>
 
-                      <select
-                        value={city}
-                        onChange={(event) => setCity(event.target.value)}
-                        className="rounded-md border border-[#4B4B4B] bg-transparent px-4 py-3 text-sm text-[#FCFCFC] outline-none"
-                      >
-                        {cityOptions.map((option) => (
-                          <option
-                            key={option}
-                            value={option}
-                            className="bg-[#262626]"
-                          >
-                            {option}
+                      <div className="relative w-full">
+                        <select
+                          value={province}
+                          onChange={(event) => setProvince(event.target.value)}
+                          className={selectClass}
+                        >
+                          <option value="" disabled>
+                            Province
                           </option>
-                        ))}
-                      </select>
+                          {provinceOptions.map((option) => (
+                            <option
+                              key={option}
+                              value={option}
+                              className="bg-[#262626]"
+                            >
+                              {option}
+                            </option>
+                          ))}
+                        </select>
 
-                      <select
-                        value={postalCode}
-                        onChange={(event) => setPostalCode(event.target.value)}
-                        className="rounded-md border border-[#4B4B4B] bg-transparent px-4 py-3 text-sm text-[#FCFCFC] outline-none"
-                      >
-                        {postalCodeOptions.map((option) => (
-                          <option
-                            key={option}
-                            value={option}
-                            className="bg-[#262626]"
-                          >
-                            {option}
+                        <SelectArrow className="pointer-events-none absolute top-1/2 right-4 -translate-y-1/2 text-white" />
+                      </div>
+
+                      <div className="relative">
+                        <select
+                          value={city}
+                          onChange={(event) => setCity(event.target.value)}
+                          className={selectClass}
+                        >
+                          <option value="" disabled>
+                            City
                           </option>
-                        ))}
-                      </select>
+                          {cityOptions.map((option) => (
+                            <option
+                              key={option}
+                              value={option}
+                              className="bg-[#262626]"
+                            >
+                              {option}
+                            </option>
+                          ))}
+                        </select>
+                        <SelectArrow className="pointer-events-none absolute top-1/2 right-4 -translate-y-1/2 text-white" />
+                      </div>
+                      <div className="relative w-full">
+                        <select
+                          value={postalCode}
+                          onChange={(event) =>
+                            setPostalCode(event.target.value)
+                          }
+                          className={`${selectClass} ${
+                            postalCode === ""
+                              ? "text-[#B0B0B0]"
+                              : "text-[#FCFCFC]"
+                          }`}
+                        >
+                          <option value="" disabled>
+                            Postal Code
+                          </option>
+                          {postalCodeOptions.map((option) => (
+                            <option
+                              key={option}
+                              value={option}
+                              className="bg-[#262626]"
+                            >
+                              {option}
+                            </option>
+                          ))}
+                        </select>
+                        <SelectArrow className="pointer-events-none absolute top-1/2 right-4 -translate-y-1/2 text-white" />
+                      </div>
                     </div>
-
                     <textarea
                       value={streetAddress}
                       onChange={(event) => setStreetAddress(event.target.value)}
                       rows={5}
                       placeholder="Input Complete Address"
-                      className="w-full rounded-md border border-[#4B4B4B] bg-transparent px-4 py-3 text-sm text-[#FCFCFC] outline-none placeholder:text-[#7B7B7B]"
+                      className="w-full rounded-md border border-[#4B4B4B] bg-transparent px-4 py-3 text-sm text-[#FCFCFC] outline-none placeholder:text-[#7B7B7B] placeholder:font-normal placeholder:text-[16px]"
                     />
 
                     <label className="flex items-center gap-3 text-sm text-[#D4D4D4]">
@@ -462,7 +481,9 @@ export default function CheckoutPage({ userCountry }: CheckoutPageProps) {
                           <CheckIcon className="h-3.5 w-3.5" />
                         ) : null}
                       </button>
-                      <span>Make it the main address</span>
+                      <span className="font-medium text-base leading-[26px] tracking-normal">
+                        Make it the main address
+                      </span>
                     </label>
                   </div>
                 )}
@@ -486,7 +507,7 @@ export default function CheckoutPage({ userCountry }: CheckoutPageProps) {
               <h2 className="font-medium text-2xl leading-9 tracking-[-0.01em]">
                 Payment Method
               </h2>
-              <div className="mt-4 flex items-center gap-4 rounded-md border border-[#383B42] bg-[#262626] px-5 py-5 sm:px-6">
+              <div className="mt-4 flex items-center gap-6 rounded-md border border-[#383B42] bg-[#262626] px-5 py-5 sm:px-6">
                 <div className="h-8.5 w-13.5 shrink-0">
                   <ApplePayIcon />
                 </div>

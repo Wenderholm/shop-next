@@ -1,6 +1,5 @@
 import Link from "next/link";
 import UserIcon from "@/components/icons/UserIcon";
-import LogoutButton from "@/components/LogoutButton";
 import CartLink from "@/components/layout/CartLink";
 
 type HeaderActionsProps = {
@@ -29,7 +28,6 @@ export default function HeaderActions({ isAuthenticated }: HeaderActionsProps) {
 
   return (
     <div className="flex flex-row items-center gap-6">
-      <LogoutButton />
       <CartLink />
       <Link href="/profile">
         <UserIcon className="w-10 h-10" />

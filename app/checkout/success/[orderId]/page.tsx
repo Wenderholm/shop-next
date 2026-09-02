@@ -8,7 +8,9 @@ interface OrderSummaryRouteProps {
   params: Promise<{ orderId: string }>;
 }
 
-export default async function OrderSummaryRoute({ params }: OrderSummaryRouteProps) {
+export default async function OrderSummaryRoute({
+  params,
+}: OrderSummaryRouteProps) {
   const session = await auth();
   const sessionUserId = session?.user?.id;
 
@@ -36,5 +38,16 @@ export default async function OrderSummaryRoute({ params }: OrderSummaryRoutePro
     redirect("/cart");
   }
 
-  return <OrderSummaryPage order={order} />;
+  return (
+    <OrderSummaryPage
+      order={{
+        ...order,
+        totalAmount: order.totalAmount.toString(),
+        orderItems: order.orderItems.map((item) => ({
+          ...item,
+          priceAtPurchase: item.priceAtPurchase.toString(),
+        })),
+      }}
+    />
+  );
 }
