@@ -5,29 +5,15 @@ import UserIcon from "@/components/icons/UserIcon";
 import TransactionIcon from "@/components/icons/TransactionIcon";
 import { buildInvoiceNumber } from "@/lib/checkout";
 
+import type { OrderWithItems } from "@/services/order.service";
+
 interface ProfilePageProps {
   user: {
     firstName: string;
     email: string;
     address: string;
   };
-  orders: Array<{
-    id: number;
-    status: string;
-    createdAt: Date;
-    totalAmount: string;
-    orderItems: Array<{
-      id: number;
-      quantity: number;
-      priceAtPurchase: string;
-      product: {
-        id: number;
-        name: string;
-        imageUrls: string[];
-        category: { name: string };
-      };
-    }>;
-  }>;
+  orders: OrderWithItems[];
 }
 
 export default function ProfilePage({ user, orders }: ProfilePageProps) {

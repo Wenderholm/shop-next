@@ -1,8 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import ApplePayIcon from "@/components/icons/paymentMethod/ApplePayIcon";
-import GreenShield from "@/components/icons/GreenShield";
 import SuccessMark from "@/components/icons/SuccessMark";
 import {
   buildInvoiceNumber,
@@ -10,24 +8,10 @@ import {
   SHIPPING_INSURANCE,
   SHIPPING_PRICE,
 } from "../../lib/checkout";
+import type { OrderWithItems } from "@/services/order.service";
 
 interface OrderSummaryPageProps {
-  order: {
-    id: number;
-    createdAt: Date;
-    totalAmount: string;
-    orderItems: Array<{
-      id: number;
-      quantity: number;
-      priceAtPurchase: string | number;
-      product: {
-        id: number;
-        name: string;
-        imageUrls: string[];
-        category: { name: string };
-      };
-    }>;
-  };
+  order: OrderWithItems;
 }
 
 export default function OrderSummaryPage({ order }: OrderSummaryPageProps) {

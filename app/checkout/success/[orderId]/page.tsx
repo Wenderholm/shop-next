@@ -2,7 +2,7 @@ import { redirect } from "next/navigation";
 
 import { auth } from "@/auth";
 import OrderSummaryPage from "@/components/cart/OrderSummaryPage";
-import { prisma } from "@/lib/prisma";
+import { getPaidOrderById } from "@/services/order.service";
 
 interface OrderSummaryRouteProps {
   params: Promise<{ orderId: string }>;
@@ -20,34 +20,11 @@ export default async function OrderSummaryRoute({
 
   const { orderId } = await params;
 
-  const order = await prisma.order.findFirst({
-    where: {
-      id: Number(orderId),
-      userId: Number(sessionUserId),
-      status: "PAID",
-    },
-    include: {
-      orderItems: {
-        orderBy: { id: "asc" },
-        include: { product: { include: { category: true } } },
-      },
-    },
-  });
+  const order = await getPaidOrderById(Number(orderId), Number(sessionUserId));
 
   if (!order) {
     redirect("/cart");
   }
 
-  return (
-    <OrderSummaryPage
-      order={{
-        ...order,
-        totalAmount: order.totalAmount.toString(),
-        orderItems: order.orderItems.map((item) => ({
-          ...item,
-          priceAtPurchase: item.priceAtPurchase.toString(),
-        })),
-      }}
-    />
-  );
+  return <OrderSummaryPage order={order} />;
 }
