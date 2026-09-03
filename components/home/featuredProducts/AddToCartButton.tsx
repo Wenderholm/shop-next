@@ -1,5 +1,5 @@
 import { Product } from "@/types/product";
-import CartIcon from "../../icons/CartIcon";
+import CartIcon from "../../icons/ui/CartIcon";
 import { useCartNotification } from "@/contexts/CartNotificationContext";
 import { useCart } from "@/contexts/CartContext";
 interface AddToCartButtonProps {

@@ -1,8 +1,8 @@
 import Link from "next/link";
 
-import LogoutButton from "@/components/LogoutButton";
+import LogoutButton from "@/components/auth/LogoutButton";
 import UserIcon from "@/components/icons/UserIcon";
-import TransactionIcon from "@/components/icons/TransactionIcon";
+import TransactionIcon from "@/components/icons/ui/TransactionIcon";
 import { buildInvoiceNumber } from "@/lib/checkout";
 
 import type { OrderWithItems } from "@/services/order.service";
@@ -20,32 +20,32 @@ export default function ProfilePage({ user, orders }: ProfilePageProps) {
   return (
     <main className="px-6 pb-10 pt-6 text-white lg:px-10">
       <div className="mx-auto max-w-[1870px]">
-        <div className="mb-[58px] flex items-center gap-6 text-[16px] leading-[26px]">
-          <Link href="/" className="text-[#B0B0B0] hover:text-white">
+        <div className="mb-[58px] flex items-center gap-6 text-base leading-6.5">
+          <Link href="/" className="text-foreground-dim hover:text-white">
             Home
           </Link>
-          <span className="text-[#B0B0B0]">›</span>
+          <span className="text-foreground-dim">›</span>
           <span className="font-medium text-white">Profile</span>
         </div>
 
         <div className="grid gap-8 xl:grid-cols-[320px_minmax(0,1fr)] xl:gap-16">
-          <aside className="h-fit rounded-md border border-[#383B42] bg-[#262626] p-6">
-            <div className="flex items-center gap-6 border-b border-[#383B42] pb-6">
-              <div className="h-[72px] w-[72px] overflow-hidden rounded-full">
+          <aside className="h-fit rounded-md border border-border-default bg-surface p-6">
+            <div className="flex items-center gap-6 border-b border-border-default pb-6">
+              <div className="h-18 w-18 overflow-hidden rounded-full">
                 <UserIcon className="h-full w-full" />
               </div>
               <div>
-                <h1 className="font-medium text-base leading-[26px] tracking-normal align-middle text-[#FCFCFC]">
+                <h1 className="align-middle text-base font-medium leading-6.5 tracking-normal text-foreground">
                   {user.firstName}
                 </h1>
-                <p className="mt-1 font-normal text-sm leading-6 tracking-normal align-middle text-[#E7E7E7]">
+                <p className="mt-1 align-middle text-sm font-normal leading-6 tracking-normal text-foreground-soft">
                   {user.email}
                 </p>
               </div>
             </div>
 
             <div className="pt-6">
-              <LogoutButton className="font-medium text-base leading-[26px] tracking-normal align-middle text-[#E7E7E7] transition hover:text-orange">
+              <LogoutButton className="align-middle text-base font-medium leading-6.5 tracking-normal text-foreground-soft transition hover:text-orange">
                 Logout
               </LogoutButton>
             </div>
@@ -53,22 +53,22 @@ export default function ProfilePage({ user, orders }: ProfilePageProps) {
 
           <section>
             <div className="mb-8 w-1/2 border-b border-orange pb-3 ">
-              <h2 className="font-semibold text-lg leading-7 tracking-normal text-center text-[#F29145]">
+              <h2 className="text-center text-lg font-semibold leading-7 tracking-normal text-orange">
                 Transaction
               </h2>
             </div>
 
             {orders.length === 0 ? (
-              <div className="rounded-2xl border border-[#383B42] bg-[#262626] px-6 py-16 text-center">
-                <h3 className="text-2xl font-medium text-[#FCFCFC]">
+              <div className="rounded-2xl border border-border-default bg-surface px-6 py-16 text-center">
+                <h3 className="text-2xl font-medium text-foreground">
                   You have no orders yet
                 </h3>
-                <p className="mt-3 text-[#B0B0B0]">
+                <p className="mt-3 text-foreground-dim">
                   Your completed orders will appear here.
                 </p>
                 <Link
                   href="/products"
-                  className="mt-6 inline-flex rounded-md bg-orange px-6 py-3 font-medium text-[#262626]"
+                  className="mt-6 inline-flex rounded-md bg-orange px-6 py-3 font-medium text-foreground-inverse"
                 >
                   Browse products
                 </Link>
@@ -94,7 +94,7 @@ export default function ProfilePage({ user, orders }: ProfilePageProps) {
                   return (
                     <article
                       key={order.id}
-                      className="rounded-xl border border-[#383B42] bg-[#262626] p-4"
+                      className="rounded-xl border border-border-default bg-surface p-4"
                     >
                       <div className="flex flex-col gap-4 md:flex-row md:items-start">
                         <div className="shrink-0 pt-1">
@@ -102,13 +102,13 @@ export default function ProfilePage({ user, orders }: ProfilePageProps) {
                         </div>
 
                         <div className="min-w-0 flex-1">
-                          <p className="font-normal text-base leading-[26px] tracking-normal text-[#E7E7E7]">
+                          <p className="text-base font-normal leading-6.5 tracking-normal text-foreground-soft">
                             {formattedDate}
                           </p>
 
-                          <div className="mt-[14px] font-medium text-lg leading-7 tracking-normal text-[#FCFCFC]">
+                          <div className="mt-3.5 text-lg font-medium leading-7 tracking-normal text-foreground">
                             Your order nr {invoiceNumber}
-                            <ul className=" list-disc pl-4 font-medium text-lg leading-7 tracking-normal text-[#FCFCFC]">
+                            <ul className="list-disc pl-4 text-lg font-medium leading-7 tracking-normal text-foreground">
                               {order.orderItems.map((item) => (
                                 <li key={item.id}>{item.product.name}</li>
                               ))}

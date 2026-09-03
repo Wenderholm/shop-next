@@ -6,7 +6,7 @@ import { useSearchParams } from "next/navigation";
 import { Brand } from "@/types/brand";
 import { Category } from "@/types/category";
 import PriceFilter from "./PriceFilter";
-import CheckIcon from "../icons/Check";
+import CheckIcon from "../icons/ui/CheckIcon";
 
 interface ProductFiltersProps {
   categories: Category[];
@@ -24,8 +24,8 @@ export default function ProductFilters({
       className="
     p-6"
     >
-      <div className="border-b border-[#383B42] pb-6">
-        <h3 className="mb-4 text-xl leading-[30px] text-[#FCFCFC] font-semibold tracking-[-0.01em]">
+      <div className="border-b border-border-default pb-6">
+        <h3 className="mb-4 text-xl font-semibold leading-7.5 tracking-[-0.01em] text-foreground">
           Category
         </h3>
 
@@ -35,8 +35,8 @@ export default function ProductFilters({
               className={`h-5 w-5 rounded border
         ${
           !searchParams.get("category")
-            ? "border-[#E5610A] bg-[#E5610A]"
-            : "border-[#616674]"
+            ? "border-brand-strong bg-brand-strong"
+            : "border-border-muted"
         }`}
             >
               {!searchParams.get("category") && (
@@ -61,7 +61,7 @@ export default function ProductFilters({
             w-5
             rounded
             border
-            ${active ? "border-[#E5610A] bg-[#E5610A]" : "border-[#616674]"}
+                ${active ? "border-brand-strong bg-brand-strong" : "border-border-muted"}
           `}
                 >
                   {active && <CheckIcon className="w-4.5 h-4.5" />}
@@ -74,8 +74,8 @@ export default function ProductFilters({
         </div>
       </div>
 
-      <div className="border-b border-[#383B42] py-6">
-        <h3 className="mb-4 text-xl leading-[30px] text-[#FCFCFC] font-semibold tracking-[-0.01em]">
+      <div className="border-b border-border-default py-6">
+        <h3 className="mb-4 text-xl font-semibold leading-7.5 tracking-[-0.01em] text-foreground">
           Brand
         </h3>
 
@@ -96,8 +96,8 @@ export default function ProductFilters({
           border
           ${
             !searchParams.get("brand")
-              ? "border-[#E5610A] bg-[#E5610A]"
-              : "border-[#616674]"
+              ? "border-brand-strong bg-brand-strong"
+              : "border-border-muted"
           }
         `}
             >
@@ -128,7 +128,7 @@ export default function ProductFilters({
               w-5
               rounded
               border
-              ${active ? "border-[#E5610A] bg-[#E5610A]" : "border-[#616674]"}
+                  ${active ? "border-brand-strong bg-brand-strong" : "border-border-muted"}
             `}
                 >
                   {active && <CheckIcon className="w-4.5 h-4.5" />}

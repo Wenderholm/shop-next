@@ -1,4 +1,4 @@
-export default function Bin() {
+export default function BinIcon() {
   return (
     <svg
       width="30"

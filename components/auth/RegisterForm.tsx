@@ -7,20 +7,20 @@ import { registerFormSchema } from "@/schemas/register.schema";
 import RegisterSuccess from "./RegisterSuccess";
 import { useRegister } from "@/hooks/useRegister";
 import { useState } from "react";
-import ShowPasswordIcon from "../icons/ShowPasswordIcon";
+import ShowPasswordIcon from "../icons/ui/ShowPasswordIcon";
 
 type RegisterFormData = z.infer<typeof registerFormSchema>;
 
 const inputBaseClass =
-  " w-full leading-[26px] font-normal rounded-[6px] border bg-[#252525] outline-none px-5 py-[14px] text-base text-[#FCFCFC]  transition placeholder:text-[#9b9b9b]";
+  "w-full rounded-md border bg-input px-5 py-3.5 text-base leading-6.5 text-foreground outline-none transition placeholder:text-[#9b9b9b]";
 
 const inputStateClass = (hasError: boolean) =>
   hasError
-    ? "border-[#DC2626] focus:border-[#DC2626]"
-    : "border-[#4a4f5f] focus:border-[#f29145]";
+    ? "border-danger-strong focus:border-danger-strong"
+    : "border-input-border focus:border-orange";
 
-const labelClass = "text-sm font-medium text-[#f3f3f3]";
-const errorClass = "mt-2 text-[14px] text-[#F87171]";
+const labelClass = "text-sm font-medium text-foreground";
+const errorClass = "mt-2 text-sm text-danger";
 
 export default function RegisterForm() {
   const {
@@ -48,8 +48,8 @@ export default function RegisterForm() {
         <span>Hub</span>
       </div>
 
-      <div className="rounded-2xl border border-[#343846] bg-[#222222] px-6 py-7 text-white shadow-[0_24px_80px_rgba(0,0,0,0.35)] sm:px-7">
-        <h1 className="text-[2rem] font-semibold tracking-[-0.03em] text-[#f3f3f3]">
+      <div className="rounded-2xl border border-[#343846] bg-surface-elevated px-6 py-7 text-white shadow-[0_24px_80px_rgba(0,0,0,0.35)] sm:px-7">
+        <h1 className="text-[2rem] font-semibold tracking-[-0.03em] text-foreground">
           Create Account
         </h1>
 
@@ -117,7 +117,7 @@ export default function RegisterForm() {
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-sm text-[#c4c4c4]"
+                className="absolute right-3 top-1/2 -translate-y-1/2 transform text-sm text-[#c4c4c4]"
               >
                 {showPassword ? <ShowPasswordIcon /> : <ShowPasswordIcon />}
               </button>
@@ -145,7 +145,7 @@ export default function RegisterForm() {
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-sm text-[#c4c4c4]"
+                className="absolute right-3 top-1/2 -translate-y-1/2 transform text-sm text-[#c4c4c4]"
               >
                 {showPassword ? <ShowPasswordIcon /> : <ShowPasswordIcon />}
               </button>
@@ -179,7 +179,7 @@ export default function RegisterForm() {
             )}
           </div>
 
-          <label className="flex items-start gap-3 text-sm leading-6 text-[#d4d4d4]">
+          <label className="flex items-start gap-3 text-sm leading-6 text-foreground-soft">
             <input
               type="checkbox"
               defaultChecked

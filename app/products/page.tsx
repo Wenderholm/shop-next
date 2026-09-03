@@ -83,11 +83,11 @@ export default async function ProductsPage({
   return (
     <>
       <div className="flex pt-10">
-        <aside className="w-[240px] shrink-0 border-t border-r border-[#383B42]">
+        <aside className="w-60 shrink-0 border-t border-r border-border-default">
           <ProductFilters categories={categories} brands={brands} />
         </aside>
 
-        <section className="flex-1 pl-10 pt-10 mb-10 border-t border-[#383B42]">
+        <section className="mb-10 flex-1 border-t border-border-default pl-10 pt-10">
           <ProductsToolbar />
           <ProductGrid products={products.data} />
 

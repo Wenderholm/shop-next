@@ -1,7 +1,7 @@
 "use client";
 
 import { useCartNotification } from "@/contexts/CartNotificationContext";
-import SuccessMark from "../icons/SuccessMark";
+import SuccessMark from "../icons/ui/SuccessMark";
 
 export default function CartNotification() {
   const { isOpen, hideNotification } = useCartNotification();

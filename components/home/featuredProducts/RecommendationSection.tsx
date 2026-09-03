@@ -3,7 +3,7 @@ import { Product } from "@/types/product";
 import RecommendationList from "./RecommendationList";
 import SeeAllButton from "./SeeAllButton";
 import { useState } from "react";
-import RightArrow from "@/components/icons/RightArrow";
+import RightArrow from "@/components/icons/navigation/RightArrow";
 
 interface RecommendationSectionProps {
   products: Product[];

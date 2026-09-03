@@ -6,7 +6,7 @@ import { Brand } from "@/types/brand";
 
 import BrandCard from "./BrandCard";
 import SeeAllButton from "./SeeAllButton";
-import RightArrow from "@/components/icons/RightArrow";
+import RightArrow from "@/components/icons/navigation/RightArrow";
 
 interface BrandListProps {
   brands: Brand[];
@@ -29,7 +29,7 @@ export default function BrandList({ brands }: BrandListProps) {
         </h2>
         <div className="flex items-center gap-[14px]">
           <SeeAllButton showAll={showAll} setShowAll={setShowAll} />
-          <RightArrow className="w-6 h-6"/>
+          <RightArrow className="w-6 h-6" />
         </div>
       </div>
       <div className="overflow-hidden">

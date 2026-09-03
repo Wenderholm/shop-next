@@ -4,10 +4,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import Bin from "@/components/icons/Bin";
+import BinIcon from "@/components/icons/ui/BinIcon";
 import { useCart } from "@/contexts/CartContext";
 import { CartItem, useCartItems } from "@/hooks/useCartItems";
-import CheckIcon from "../icons/Check";
+import CheckIcon from "../icons/ui/CheckIcon";
 import React from "react";
 
 export default function CartPage() {
@@ -53,24 +53,26 @@ export default function CartPage() {
   const allSelected = items.length > 0 && selected.length === items.length;
 
   if (loading)
-    return <main className="px-10 py-16 text-[#B0B0B0]">Loading cart...</main>;
+    return (
+      <main className="px-10 py-16 text-foreground-dim">Loading cart...</main>
+    );
 
   return (
     <main className="px-10 pb-20 pt-10 text-white">
-      <div className="mb-14 flex items-center gap-4 text-[16px]">
-        <Link href="/" className="text-[#B0B0B0] hover:text-white">
+      <div className="mb-14 flex items-center gap-4 text-base">
+        <Link href="/" className="text-foreground-dim hover:text-white">
           Home
         </Link>
-        <span className="text-[#777]">›</span>
+        <span className="text-foreground-subtle">›</span>
         <span>Cart</span>
       </div>
 
       {items.length === 0 ? (
-        <div className="border-t border-[#383B42] py-20 text-center">
+        <div className="border-t border-border-default py-20 text-center">
           <h1 className="text-2xl font-medium">Your cart is empty</h1>
           <Link
             href="/products"
-            className="mt-6 inline-block rounded-lg bg-orange px-6 py-3 text-[#262626]"
+            className="mt-6 inline-block rounded-lg bg-orange px-6 py-3 text-foreground-inverse"
           >
             Browse products
           </Link>
@@ -85,8 +87,8 @@ export default function CartPage() {
                 onClick={() =>
                   setSelected(allSelected ? [] : items.map((item) => item.id))
                 }
-                className={`flex h-[26px] w-[26px] items-center justify-center rounded-md border transition
-                    ${allSelected ? "border-[#E5610A] bg-[#E5610A]" : "border-[#616674]"}
+                className={`flex h-6.5 w-6.5 items-center justify-center rounded-md border transition
+                    ${allSelected ? "border-brand-strong bg-brand-strong" : "border-border-muted"}
                 `}
               >
                 {allSelected && <CheckIcon className="h-4 w-4 text-white" />}
@@ -102,8 +104,8 @@ export default function CartPage() {
                     aria-label={`Select ${item.product.name}`}
                     className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-md border transition ${
                       selected.includes(item.id)
-                        ? "border-[#E5610A] bg-[#E5610A]"
-                        : "border-[#616674]"
+                        ? "border-brand-strong bg-brand-strong"
+                        : "border-border-muted"
                     }`}
                   >
                     {selected.includes(item.id) && (
@@ -111,7 +113,7 @@ export default function CartPage() {
                     )}
                   </button>
 
-                  <div className="flex min-w-0 flex-1 gap-5 rounded-lg border border-[#353535] bg-[#262626] p-5">
+                  <div className="flex min-w-0 flex-1 gap-5 rounded-lg border border-border-strong bg-surface p-5">
                     <div className="flex min-w-0 flex-1 gap-8">
                       <Image
                         src={item.product.imageUrls[0]}
@@ -124,11 +126,11 @@ export default function CartPage() {
                       <div className="min-w-0 flex-1">
                         <div className="flex justify-between gap-4">
                           <div>
-                            <h2 className="text-xl leading-[30px] font-medium tracking-[-0.01em] text-[#FCFCFC]">
+                            <h2 className="text-xl font-medium leading-7.5 tracking-[-0.01em] text-foreground">
                               {item.product.name}
                             </h2>
 
-                            <span className="mt-3 inline-block rounded-md bg-[#E5610A] px-[10px] py-[6px] text-sm leading-6 font-medium text-[#FDEDD7]">
+                            <span className="mt-3 inline-block rounded-md bg-brand-strong px-2.5 py-1.5 text-sm font-medium leading-6 text-accent-soft">
                               {item.product.category.name}
                             </span>
                           </div>
@@ -139,16 +141,16 @@ export default function CartPage() {
                             className="flex transition hover:opacity-80"
                             aria-label={`Remove ${item.product.name}`}
                           >
-                            <Bin />
+                            <BinIcon />
                           </button>
                         </div>
 
                         <div className="mt-5 flex flex-wrap items-center justify-between">
-                          <p className="mt-4 text-[30px] font-semibold leading-10 tracking-[-0.01em] text-[#FCFCFC]">
+                          <p className="mt-4 text-[30px] font-semibold leading-10 tracking-[-0.01em] text-foreground">
                             ${Number(item.priceAtPurchase).toFixed(2)}
                           </p>
                           <div className="flex flex-wrap items-center gap-6">
-                            <span className="inline-block text-[16px] leading-6.5 text-[#F29145] border-r py-0 pr-6 pl-2 border-[#D4D4D4]">
+                            <span className="inline-block border-r border-neutral-soft py-0 pl-2 pr-6 text-base leading-6.5 text-orange">
                               Write Note
                             </span>
                             <div className="flex items-center rounded-md border border-[#D5D5D5] px-2 py-[6px]">
@@ -186,27 +188,27 @@ export default function CartPage() {
             </div>
           </section>
 
-          <aside className="h-fit rounded-lg border border-[#353535] bg-[#262626] p-6">
+          <aside className="h-fit rounded-lg border border-border-strong bg-surface p-6">
             <h2 className="font-medium text-[18px] leading-7 tracking-normal ">
               Total Product
             </h2>
-            <div className="mt-4 flex justify-between border-b border-[#383B42] pb-6 text-[#E7E7E7]">
-              <span className="text-[16px] leading-[26px] tracking-normal">
+            <div className="mt-4 flex justify-between border-b border-border-default pb-6 text-foreground-soft">
+              <span className="text-base leading-6.5 tracking-normal">
                 Total Product Price (
                 {items.reduce((sum, item) => sum + item.quantity, 0)} Item)
               </span>
-              <span className="text-[18px] leading-[28px] tracking-normal">
+              <span className="text-lg leading-7 tracking-normal">
                 ${total.toFixed(2)}
               </span>
             </div>
-            <div className="mt-[30px] flex justify-between text-[18px] leading-[28px] tracking-normal text-[#FCFCFC]">
+            <div className="mt-[30px] flex justify-between text-lg leading-7 tracking-normal text-foreground">
               <span>Subtotal</span>
               <span>${total.toFixed(2)}</span>
             </div>
             <button
               type="button"
               onClick={() => router.push("/checkout")}
-              className="mt-8 w-full rounded-md bg-orange py-[14px] text-[#262626]"
+              className="mt-8 w-full rounded-md bg-orange py-3.5 text-foreground-inverse"
             >
               Checkout
             </button>

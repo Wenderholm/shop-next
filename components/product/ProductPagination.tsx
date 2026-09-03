@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import LeftArrow from "../icons/LeftArrow";
-import RightArrow from "../icons/RightArrow";
+import LeftArrow from "../icons/navigation/LeftArrow";
+import RightArrow from "../icons/navigation/RightArrow";
 
 interface ProductPaginationProps {
   page: number;
@@ -24,28 +24,33 @@ export default function ProductPagination({
     return `/products?${params.toString()}`;
   };
 
-  const getPages = () => {
-    const pages: (number | "...")[] = [];
+  const getPages = (): (number | "...")[] => {
+    // const pages: (number | "...")[] = [];
 
-    // Jeżeli stron jest mało, pokazujemy wszystkie
-    if (totalPages <= 6) {
-      for (let i = 1; i <= totalPages; i++) {
-        pages.push(i);
-      }
-
-      return pages;
+    // Mało stron → pokazujemy wszystkie
+    if (totalPages <= 7) {
+      return Array.from({ length: totalPages }, (_, index) => index + 1);
     }
 
-    // Pierwsze 3 strony
-    pages.push(1, 2, 3);
+    // Początek
+    if (page <= 3) {
+      return [1, 2, 3, 4, "...", totalPages - 2, totalPages - 1, totalPages];
+    }
 
-    // ...
-    pages.push("...");
+    // Środek
+    if (page >= 4 && page <= totalPages - 3) {
+      return [1, "...", page - 1, page, page + 1, "...", totalPages];
+    }
 
-    // Ostatnie 3 strony
-    pages.push(totalPages - 2, totalPages - 1, totalPages);
-
-    return pages;
+    // Koniec
+    return [
+      1,
+      "...",
+      totalPages - 3,
+      totalPages - 2,
+      totalPages - 1,
+      totalPages,
+    ];
   };
 
   const pages = getPages();
@@ -59,7 +64,7 @@ export default function ProductPagination({
             return (
               <span
                 key={`dots-${index}`}
-                className="flex h-8 w-8 items-center justify-center text-[#9CA3AF]"
+                className="flex h-8 w-8 items-center justify-center text-gray-400"
               >
                 ...
               </span>
@@ -71,19 +76,19 @@ export default function ProductPagination({
               key={item}
               href={createPageUrl(item)}
               className={`
-                flex
-                h-11
-                w-11
-                items-center
-                justify-center
-                rounded-md
-                text-[16px]
-                ${
-                  page === item
-                    ? "bg-[#E5610A] text-#262626"
-                    : "text-[#B0B0B0] hover:text-white"
-                }
-              `}
+          flex
+          h-11
+          w-11
+          items-center
+          justify-center
+          rounded-md
+          text-base
+          ${
+            page === item
+              ? "bg-brand-strong text-foreground-inverse"
+              : "text-foreground-dim hover:text-white"
+          }
+        `}
             >
               {item}
             </Link>
@@ -103,11 +108,11 @@ export default function ProductPagination({
               gap-2
               rounded-md
               border
-              border-[#616674]
+              border-border-muted
               px-4
               text-sm
-              text-[#FCFCFC]
-              hover:bg-[#262626]
+              text-foreground
+              hover:bg-surface
             "
           >
             <LeftArrow className="w-5 h-5" /> Previous
@@ -123,18 +128,18 @@ export default function ProductPagination({
               flex
               h-10
               items-center
-              gap-[14px]
+              gap-3.5
               rounded-md
               border
-              border-[#616674]
+              border-border-muted
               px-5
               leading-6
               text-sm
-              text-[#FCFCFC]
-              hover:bg-[#262626]
+              text-foreground
+              hover:bg-surface
             "
           >
-            Next <RightArrow className="w-5 h-5" />
+            Next <RightArrow className="w-5 h-5 text-white" />
           </Link>
         ) : (
           <div className="h-10" />

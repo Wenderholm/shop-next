@@ -2,9 +2,9 @@
 import { Category } from "@/types/category";
 import Image from "next/image";
 import Link from "next/link";
-import ArrowRightIcon from "../../icons/ArrowRightIcon";
-import ArrowLeftIcon from "../../icons/ArrowLeftIcon";
-import RightArrow from "../../icons/RightArrow";
+import ArrowRightIcon from "../../icons/navigation/ArrowRightIcon";
+import ArrowLeftIcon from "../../icons/navigation/ArrowLeftIcon";
+import RightArrow from "../../icons/navigation/RightArrow";
 import CarouselDots from "./CarouselDots";
 import { useState } from "react";
 

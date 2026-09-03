@@ -50,9 +50,7 @@ export default function ProductsToolbar() {
   return (
     <div className="mb-8 flex items-center gap-8">
       <div className="flex items-center gap-3">
-        <span className="text-[20px] leading-[30px] text-[#FCFCFC]">
-          Sort by
-        </span>
+        <span className="text-xl leading-7.5 text-foreground">Sort by</span>
 
         <select
           value={searchParams.get("sort") ?? ""}
@@ -60,12 +58,12 @@ export default function ProductsToolbar() {
           className="
             rounded
             border
-            border-[#616674]
-            bg-[#262626]
+            border-border-muted
+            bg-surface
             px-4
             py-2
-            text-[14px]
-            text-[#FCFCFC]
+            text-sm
+            text-foreground
           "
         >
           {sortOptions.map((option) => (
@@ -77,7 +75,7 @@ export default function ProductsToolbar() {
       </div>
 
       <div className="flex items-center gap-3">
-        <span className="text-[20px] leading-[30px] text-[#FCFCFC]">Show</span>
+        <span className="text-xl leading-7.5 text-foreground">Show</span>
 
         <select
           value={searchParams.get("limit") ?? "9"}
@@ -85,12 +83,12 @@ export default function ProductsToolbar() {
           className="
             rounded
             border
-            border-[#383B42]
-            bg-[#262626]
+            border-border-default
+            bg-surface
             px-4
             py-2
-            text-[14px]
-            text-[#FCFCFC]
+            text-sm
+            text-foreground
           "
         >
           {limits.map((limit) => (

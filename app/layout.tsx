@@ -23,7 +23,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`bg-[#1A1A1A] text-white ${inter.className}`}>
+      <body className={`bg-app text-white ${inter.className}`}>
         <CartNotificationProvider>
           <CartProvider>
             <Container>

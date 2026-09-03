@@ -8,19 +8,19 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { loginFormSchema, type LoginFormData } from "@/schemas/login.schema";
-import CheckIcon from "../icons/Check";
+import CheckIcon from "../icons/ui/CheckIcon";
 // font-normal   tracking-normal
 const inputBaseClass =
-  "mt-4 w-full leading-[26px] font-normal rounded-[6px] border bg-[#252525] px-5 py-[14px] outline-none text-base text-[#FCFCFC]  transition placeholder:text-[#9b9b9b]";
+  "mt-4 w-full rounded-md border bg-input px-5 py-3.5 text-base leading-6.5 text-foreground outline-none transition placeholder:text-[#9b9b9b]";
 
 const inputStateClass = (hasError: boolean) =>
   hasError
-    ? "border-[#DC2626] focus:border-[#DC2626]"
-    : "border-[#4a4f5f] focus:border-[#f29145]";
+    ? "border-danger-strong focus:border-danger-strong"
+    : "border-input-border focus:border-orange";
 
-const labelClass = "text-[18px] leading-[28px] font-medium text-[#FCFCFC]";
+const labelClass = "text-lg font-medium leading-7 text-foreground";
 
-const errorClass = "mt-2 text-[14px] text-[#F87171]";
+const errorClass = "mt-2 text-sm text-danger";
 
 export default function LoginForm() {
   const router = useRouter();
@@ -111,8 +111,8 @@ export default function LoginForm() {
         <span>Hub</span>
       </div>
 
-      <div className="rounded-2xl mb-20 border border-[#383B42] bg-[#262626] p-6 text-white sm:px-7">
-        <h1 className="text-[24px] leading-[36px] font-medium tracking-[-0.01em] text-[#FCFCFC] border-b border-[#383B42] pb-5">
+      <div className="mb-20 rounded-2xl border border-border-default bg-surface p-6 text-white sm:px-7">
+        <h1 className="border-b border-border-default pb-5 text-2xl font-medium leading-9 tracking-[-0.01em] text-foreground">
           {step === "email" ? "Sign In" : "Enter Password"}
         </h1>
 
@@ -123,7 +123,7 @@ export default function LoginForm() {
         >
           {/* BŁĄD Z API / NEXTAUTH */}
           {submitError && (
-            <p className="rounded-xl border border-[#bedc26] px-4 py-3 text-sm text-[#F87171]">
+            <p className="rounded-xl border border-danger px-4 py-3 text-sm text-danger">
               {submitError}
             </p>
           )}
@@ -178,7 +178,7 @@ export default function LoginForm() {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full rounded-md bg-orange px-4 py-[14px] text-[16px] font-medium text-[#1d1d1d] transition hover:brightness-105 disabled:cursor-not-allowed disabled:opacity-50"
+            className="w-full rounded-md bg-orange px-4 py-3.5 text-base font-medium text-[#1d1d1d] transition hover:brightness-105 disabled:cursor-not-allowed disabled:opacity-50"
           >
             {isSubmitting
               ? "Loading..."
@@ -196,10 +196,10 @@ export default function LoginForm() {
             >
               <div className="flex gap-3">
                 <div
-                  className={`flex h-[26px] w-[26px] items-center justify-center rounded-[4px] border transition ${
+                  className={`flex h-6.5 w-6.5 items-center justify-center rounded border transition ${
                     isMarked
                       ? "border-orange bg-orange"
-                      : "border-[#4a4f5f] bg-transparent"
+                      : "border-input-border bg-transparent"
                   }`}
                 >
                   {isMarked && (
@@ -207,11 +207,11 @@ export default function LoginForm() {
                   )}
                 </div>
 
-                <div className="text-[#E7E7E7] text-[16px] leading-6.5 font-normal">
+                <div className="text-base font-normal leading-6.5 text-foreground-soft">
                   Save password
                 </div>
               </div>
-              <div className="text-[#E7E7E7] text-[16px] leading-6.5 font-medium ">
+              <div className="text-base font-medium leading-6.5 text-foreground-soft">
                 Forgot your password?
               </div>
             </button>

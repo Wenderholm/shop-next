@@ -2,4 +2,24 @@
 
 @theme {
   --color-orange: #f29145;
+  --color-brand-strong: #e5610a;
+  --color-app: #1a1a1a;
+  --color-surface: #262626;
+  --color-surface-alt: #202125;
+  --color-surface-elevated: #222327;
+  --color-surface-muted: #242424;
+  --color-input: #252525;
+  --color-border-default: #383b42;
+  --color-border-muted: #616674;
+  --color-border-strong: #353535;
+  --color-neutral-soft: #d4d4d4;
+  --color-foreground: #fcfcfc;
+  --color-foreground-soft: #e7e7e7;
+  --color-foreground-dim: #b0b0b0;
+  --color-foreground-subtle: #777777;
+  --color-foreground-inverse: #262626;
+  --color-accent-soft: #fdedd7;
+  --color-danger: #f87171;
+  --color-danger-strong: #dc2626;
+  --color-input-border: #4a4f5f;
 }

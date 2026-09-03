@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import CartIcon from "@/components/icons/CartIcon";
+import CartIcon from "@/components/icons/ui/CartIcon";
 import { useCart } from "@/contexts/CartContext";
 
 export default function CartLink() {

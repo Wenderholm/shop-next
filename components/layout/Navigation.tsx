@@ -15,24 +15,28 @@ export default function Navigation({ isAuthenticated }: NavigationProps) {
   }
 
   return (
-    <nav className="flex flex-row gap-12 font-semibold text-[16px] leading-[26px] mb-10 ">
+    <nav className="mb-10 flex flex-row gap-12 text-base font-semibold leading-6.5">
       <Link
         href="/"
-        className={pathname === "/" ? "text-orange" : "text-[#B0B0B0]"}
+        className={pathname === "/" ? "text-orange" : "text-foreground-dim"}
       >
         Home
       </Link>
 
       <Link
         href="/products"
-        className={pathname === "/products" ? "text-orange" : "text-[#B0B0B0]"}
+        className={
+          pathname === "/products" ? "text-orange" : "text-foreground-dim"
+        }
       >
         Products
       </Link>
 
       <Link
         href="/contact"
-        className={pathname === "/contact" ? "text-orange" : "text-[#B0B0B0]"}
+        className={
+          pathname === "/contact" ? "text-orange" : "text-foreground-dim"
+        }
       >
         Contact
       </Link>

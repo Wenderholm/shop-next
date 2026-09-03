@@ -1,5 +1,5 @@
 import Link from "next/link";
-import SuccessMark from "../icons/SuccessMark";
+import SuccessMark from "../icons/ui/SuccessMark";
 
 export default function RegisterSuccess() {
   return (

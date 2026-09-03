@@ -5,7 +5,7 @@ interface RightArrowProps {
 export default function RightArrow({ className }: RightArrowProps) {
   return (
     <svg
-      className={className}
+      className={`text-[#F29145] ${className ?? ""}`}
       // width="24"
       // height="24"
       viewBox="0 0 24 24"
@@ -14,7 +14,7 @@ export default function RightArrow({ className }: RightArrowProps) {
     >
       <path
         d="M20 12L4 12M14 6L20 12L14 18"
-        stroke="#F29145"
+        stroke="currentColor"
         strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"

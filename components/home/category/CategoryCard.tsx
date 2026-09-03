@@ -1,10 +1,10 @@
 import Link from "next/link";
 import { Category } from "@/types/category";
-import MouseIcon from "../../icons/MouseIcon";
-import MonitorIcon from "../../icons/MonitorIcon";
-import HeadphoneIcon from "../../icons/HeadphoneIcon";
-import KeyboardIcon from "../../icons/KeyboardIcon";
-import WebcamIcon from "../../icons/WebcamIcon";
+import MouseIcon from "../../icons/product/MouseIcon";
+import MonitorIcon from "../../icons/product/MonitorIcon";
+import HeadphoneIcon from "../../icons/product/HeadphoneIcon";
+import KeyboardIcon from "../../icons/product/KeyboardIcon";
+import WebcamIcon from "../../icons/product/WebcamIcon";
 
 interface CategoryCardProps {
   category: Category;
