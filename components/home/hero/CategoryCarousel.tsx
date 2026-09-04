@@ -35,18 +35,18 @@ export default function CategoryCarousel({
     w-full 
     max-w-[1360px]     
     lg:mx-10
-    bg-[#222327] 
+    bg-surface-elevated 
     rounded-md 
     border 
-    border-[#383B42] 
+    border-border-default 
     overflow-hidden"
       >
-        <div className=" max-w-[433px] flex-col  sm:ml-[120px]">
-          <h2 className="font-medium text-[32px]  leading-11 tracking-[-0.32px] text-[#FCFCFC] mb-6 pt-[132px]">
+        <div className=" max-w-[433px] flex-col  sm:ml-30">
+          <h2 className="font-medium text-[32px]  leading-11 tracking-[-0.32px] text-foreground mb-6 pt-[132px]">
             {category.name}
           </h2>
 
-          <p className="font-normal text-justify text-base leading-6.5 text-[#E7E7E7] mb-10">
+          <p className="font-normal text-justify text-base leading-6.5 text-foreground-soft mb-10">
             {category.description}
           </p>
 
@@ -104,7 +104,7 @@ export default function CategoryCarousel({
     justify-center
     rounded-br-md
     rounded-tr-md
-    bg-[#F29145]
+    bg-orange
   "
           onClick={handlePrevious}
         >
@@ -123,9 +123,9 @@ export default function CategoryCarousel({
     w-[44px]
     items-center
     justify-center
-    rounded-bl-[6px]
-    rounded-tl-[6px]
-    bg-[#F29145]
+    rounded-bl-md
+    rounded-tl-md
+    bg-orange
   "
           onClick={handleNext}
         >

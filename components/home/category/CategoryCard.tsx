@@ -30,13 +30,13 @@ export default function CategoryCard({ category }: CategoryCardProps) {
         py-[28px]
         rounded-md
         border
-        border-[#616674]
+        border-border-muted
         bg-[#262626]
       "
     >
       <div>{icons[category.name as keyof typeof icons]}</div>
 
-      <span className="font-medium text-[20px] leading-[30px] tracking-[-0.01em] text-[#FCFCFC]">
+      <span className="font-medium text-[20px] leading-7.5 tracking-[-0.01em] text-[#FCFCFC]">
         {category.name}
       </span>
     </Link>

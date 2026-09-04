@@ -2,55 +2,29 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
-import { useRouter } from "next/navigation";
 import BinIcon from "@/components/icons/ui/BinIcon";
-import { useCart } from "@/contexts/CartContext";
-import { CartItem, useCartItems } from "@/hooks/useCartItems";
 import CheckIcon from "../icons/ui/CheckIcon";
-import React from "react";
+import { useCartPage } from "@/hooks/useCartPage";
 
 export default function CartPage() {
-  const [selected, setSelected] = useState<number[]>([]);
-  const { items, loading, loadCart } = useCartItems();
-  const { refreshCart } = useCart();
-  const router = useRouter();
-
-  const updateQuantity = async (item: CartItem, quantity: number) => {
-    if (quantity < 1 || quantity > item.product.stock) return;
-    await fetch("/api/orders", {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ itemId: item.id, quantity }),
-    });
-    await loadCart();
-    await refreshCart();
-  };
-
-  const removeItem = async (itemId: number) => {
-    await fetch("/api/orders", {
-      method: "DELETE",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ itemId }),
-    });
-    setSelected((current) => current.filter((id) => id !== itemId));
-    await loadCart();
-    await refreshCart();
-  };
-
-  const toggleSelected = (itemId: number) => {
-    setSelected((current) =>
-      current.includes(itemId)
-        ? current.filter((id) => id !== itemId)
-        : [...current, itemId],
-    );
-  };
-
-  const total = items.reduce(
-    (sum, item) => sum + Number(item.priceAtPurchase) * item.quantity,
-    0,
-  );
-  const allSelected = items.length > 0 && selected.length === items.length;
+  const {
+    items,
+    loading,
+    selected,
+    total,
+    selectedItemCount,
+    allSelected,
+    toggleSelected,
+    toggleSelectAll,
+    updateQuantity,
+    removeItem,
+    goToCheckout,
+  } = useCartPage();
+  // const total = items.reduce(
+  //   (sum, item) => sum + Number(item.priceAtPurchase) * item.quantity,
+  //   0,
+  // );
+  // const allSelected = items.length > 0 && selected.length === items.length;
 
   if (loading)
     return (
@@ -84,9 +58,7 @@ export default function CartPage() {
               <button
                 type="button"
                 aria-label="Select all products"
-                onClick={() =>
-                  setSelected(allSelected ? [] : items.map((item) => item.id))
-                }
+                onClick={() => toggleSelectAll()}
                 className={`flex h-6.5 w-6.5 items-center justify-center rounded-md border transition
                     ${allSelected ? "border-brand-strong bg-brand-strong" : "border-border-muted"}
                 `}
@@ -157,7 +129,7 @@ export default function CartPage() {
                               <button
                                 type="button"
                                 onClick={() =>
-                                  updateQuantity(item, item.quantity - 1)
+                                  updateQuantity(item.id, item.quantity - 1)
                                 }
                                 className="h-9 w-8 text-2xl"
                               >
@@ -171,7 +143,7 @@ export default function CartPage() {
                               <button
                                 type="button"
                                 onClick={() =>
-                                  updateQuantity(item, item.quantity + 1)
+                                  updateQuantity(item.id, item.quantity + 1)
                                 }
                                 className="h-9 w-8 text-2xl"
                               >
@@ -195,7 +167,10 @@ export default function CartPage() {
             <div className="mt-4 flex justify-between border-b border-border-default pb-6 text-foreground-soft">
               <span className="text-base leading-6.5 tracking-normal">
                 Total Product Price (
-                {items.reduce((sum, item) => sum + item.quantity, 0)} Item)
+                {selectedItemCount > 1
+                  ? `${selectedItemCount} Items`
+                  : `${selectedItemCount} Item`}
+                )
               </span>
               <span className="text-lg leading-7 tracking-normal">
                 ${total.toFixed(2)}
@@ -207,7 +182,7 @@ export default function CartPage() {
             </div>
             <button
               type="button"
-              onClick={() => router.push("/checkout")}
+              onClick={goToCheckout}
               className="mt-8 w-full rounded-md bg-orange py-3.5 text-foreground-inverse"
             >
               Checkout

@@ -5,7 +5,7 @@ interface RightArrowProps {
 export default function RightArrow({ className }: RightArrowProps) {
   return (
     <svg
-      className={`text-[#F29145] ${className ?? ""}`}
+      className={`text-orange ${className ?? ""}`}
       // width="24"
       // height="24"
       viewBox="0 0 24 24"
