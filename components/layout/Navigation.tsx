@@ -15,7 +15,7 @@ export default function Navigation({ isAuthenticated }: NavigationProps) {
   }
 
   return (
-    <nav className="mb-5 text-[14px] gap-5 sm:mb-10 flex flex-row sm:gap-12 sm:text-base font-semibold leading-6.5">
+    <nav className="mb-5 text-[14px] gap-5 sm:mb-10 flex justify-center flex-row sm:gap-12 sm:text-base font-semibold leading-6.5">
       <Link
         href="/"
         className={pathname === "/" ? "text-orange" : "text-foreground-dim"}
