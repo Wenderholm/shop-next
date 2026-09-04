@@ -1,4 +1,10 @@
+import { useId } from "react";
+
 export default function RexusLogo() {
+  const logoId = useId();
+  const patternId = `${logoId}-pattern`;
+  const imageId = `${logoId}-image`;
+
   return (
     <svg
       width="46"
@@ -8,18 +14,18 @@ export default function RexusLogo() {
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
     >
-      <rect width="46" height="46" fill="url(#pattern0_1488_29197)" />
+      <rect width="46" height="46" fill={`url(#${patternId})`} />
       <defs>
         <pattern
-          id="pattern0_1488_29197"
+          id={patternId}
           patternContentUnits="objectBoundingBox"
           width="1"
           height="1"
         >
-          <use xlinkHref="#image0_1488_29197" transform="scale(0.000925926)" />
+          <use xlinkHref={`#${imageId}`} transform="scale(0.000925926)" />
         </pattern>
         <image
-          id="image0_1488_29197"
+          id={imageId}
           width="1080"
           height="1080"
           preserveAspectRatio="none"

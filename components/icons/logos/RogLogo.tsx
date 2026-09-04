@@ -1,4 +1,10 @@
+import { useId } from "react";
+
 export default function RogLogo() {
+  const logoId = useId();
+  const patternId = `${logoId}-pattern`;
+  const imageId = `${logoId}-image`;
+
   return (
     <svg
       width="79"
@@ -8,21 +14,21 @@ export default function RogLogo() {
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
     >
-      <rect width="78.0357" height="46" fill="url(#pattern0_1488_29182)" />
+      <rect width="78.0357" height="46" fill={`url(#${patternId})`} />
       <defs>
         <pattern
-          id="pattern0_1488_29182"
+          id={patternId}
           patternContentUnits="objectBoundingBox"
           width="1"
           height="1"
         >
           <use
-            xlinkHref="#image0_1488_29182"
+            xlinkHref={`#${imageId}`}
             transform="matrix(0.000401823 0 0 0.000681663 -0.0022782 0)"
           />
         </pattern>
         <image
-          id="image0_1488_29182"
+          id={imageId}
           width="2500"
           height="1467"
           preserveAspectRatio="none"

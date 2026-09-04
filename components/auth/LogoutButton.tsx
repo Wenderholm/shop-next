@@ -17,7 +17,7 @@ export default function LogoutButton({
       onClick={() => signOut({ callbackUrl: "/login" })}
       className={
         className ??
-        "rounded-xl border border-orange bg-orange px-5 py-3 font-semibold text-[16px] leading-[26px] text-[#262626] transition-colors hover:border-orange hover:text-white"
+        "rounded-xl border border-orange bg-orange px-5 py-3 font-semibold text-[16px] leading-6.5 text-[#262626] transition-colors hover:border-orange hover:text-white"
       }
     >
       {children ?? "Logout"}

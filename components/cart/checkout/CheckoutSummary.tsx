@@ -1,5 +1,3 @@
-import { checkoutEntryClass } from "./styles";
-
 interface CheckoutSummaryProps {
   itemCount: number;
   subtotal: number;
@@ -25,51 +23,67 @@ export default function CheckoutSummary({
   isSubmitting,
   onCheckout,
 }: CheckoutSummaryProps) {
+  const summaryRowClass =
+    "flex w-full flex-col items-center justify-between gap-1 sm:flex-row sm:items-start";
+
   return (
-    <aside className="h-fit rounded-md border border-[#353535] bg-[#262626] p-4 sm:px-[24px] sm:py-[36px]">
-      <h2 className="text-lg font-medium leading-7 tracking-normal align-middle text-[#FCFCFC]">
+    <aside className="h-fit rounded-md border border-border-strong bg-[#262626] p-4 sm:px-6 sm:py-9">
+      <h2 className="text-center sm:text-left text-lg font-medium leading-7 tracking-normal align-middle text-foreground">
         Total Product
       </h2>
-      <div className="mt-5 space-y-4 border-b border-[#383B42] pb-6 text-sm text-[#D4D4D4]">
-        <div className={checkoutEntryClass}>
-          <span>Total Product Price ({itemCount} Item)</span>
-          <span>${subtotal.toFixed(2)}</span>
+      <div className="mt-5 space-y-5 border-b border-border-default pb-6 text-sm sm:text-[16px] text-neutral-soft">
+        <div className={summaryRowClass}>
+          <span>
+            Total Product Price ({itemCount}
+            {itemCount === 1 ? " Item" : " Items"})
+          </span>
+          <span className="text-center sm:text-left text-base text-foreground sm:text-lg">
+            ${subtotal.toFixed(2)}
+          </span>
         </div>
-        <div className={checkoutEntryClass}>
+        <div className={summaryRowClass}>
           <span>Total Product Protection</span>
-          <span>${protectionTotal.toFixed(2)}</span>
+          <span className=" text-center sm:text-left text-base text-foreground sm:text-lg">
+            ${protectionTotal.toFixed(2)}
+          </span>
         </div>
-        <div className={checkoutEntryClass}>
+        <div className={summaryRowClass}>
           <span>Total Shipping Price</span>
-          <span>${shippingPrice.toFixed(2)}</span>
+          <span className="text-center sm:text-left text-base text-foreground sm:text-lg">
+            ${shippingPrice.toFixed(2)}
+          </span>
         </div>
-        <div className={checkoutEntryClass}>
+        <div className={summaryRowClass}>
           <span>Shipping Insurance</span>
-          <span>${shippingInsurance.toFixed(2)}</span>
+          <span className="text-center sm:text-left text-base text-foreground sm:text-lg">
+            ${shippingInsurance.toFixed(2)}
+          </span>
         </div>
       </div>
 
-      <div className="mt-6 space-y-4 border-b border-[#383B42] pb-6 text-sm text-[#D4D4D4]">
-        <p className="text-lg font-medium leading-7 tracking-normal align-middle text-[#FCFCFC]">
+      <div className="mt-6 space-y-4 border-b border-border-default pb-6 text-sm text-neutral-soft">
+        <p className="text-center sm:text-left text-lg font-medium leading-7 tracking-normal align-middle text-foreground">
           Transaction Fees
         </p>
-        <div className={checkoutEntryClass}>
-          <span>Service Fees</span>
-          <span>${serviceFee.toFixed(2)}</span>
+        <div className={summaryRowClass}>
+          <span className="text-sm sm:text-[16px]">Service Fees</span>
+          <span className="text-center sm:text-left text-base text-foreground sm:text-lg">
+            ${serviceFee.toFixed(2)}
+          </span>
         </div>
       </div>
 
-      <div className="mt-6 flex items-center justify-between gap-4 text-xl font-medium">
-        <span className="text-lg font-medium leading-7 tracking-normal align-middle text-[#FCFCFC]">
+      <div className="mt-6 flex flex-col sm:flex-row items-center sm:items-start justify-center sm:justify-between gap-1 text-xl font-medium">
+        <span className="text-center sm:text-left text-lg font-medium leading-7 tracking-normal align-middle text-foreground">
           Grand total
         </span>
-        <span className="text-lg font-medium leading-7 tracking-normal align-middle text-[#FCFCFC]">
+        <span className="text-lg sm:text-[28px] font-medium leading-7 tracking-normal align-middle text-foreground">
           ${grandTotal.toFixed(2)}
         </span>
       </div>
 
       {submitError ? (
-        <p className="mt-6 text-sm text-[#F87171]">{submitError}</p>
+        <p className="mt-6 text-sm text-danger">{submitError}</p>
       ) : null}
 
       <button

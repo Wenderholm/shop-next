@@ -56,15 +56,15 @@ export default function ProductPagination({
   const pages = getPages();
 
   return (
-    <div className="mt-10 flex items-center justify-between">
+    <div className="mt-10 flex flex-col gap-4 sm:gap-5 lg:flex-row lg:items-center lg:justify-between">
       {/* NUMERY STRON */}
-      <div className="flex items-center gap-2">
+      <div className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 lg:justify-start">
         {pages.map((item, index) => {
           if (item === "...") {
             return (
               <span
                 key={`dots-${index}`}
-                className="flex h-8 w-8 items-center justify-center text-gray-400"
+                className="flex h-7 w-7 items-center justify-center text-xs text-gray-400 sm:h-8 sm:w-8 sm:text-sm"
               >
                 ...
               </span>
@@ -77,12 +77,15 @@ export default function ProductPagination({
               href={createPageUrl(item)}
               className={`
           flex
-          h-11
-          w-11
+          h-8
+          w-8
           items-center
           justify-center
           rounded-md
-          text-base
+          text-sm
+          sm:h-11
+          sm:w-11
+          sm:text-base
           ${
             page === item
               ? "bg-brand-strong text-foreground-inverse"
@@ -97,28 +100,31 @@ export default function ProductPagination({
       </div>
 
       {/* PREVIOUS / NEXT */}
-      <div className="flex items-center gap-4">
+      <div className="flex w-full items-center justify-center gap-3 sm:gap-4 lg:w-auto lg:justify-end">
         {page > 1 ? (
           <Link
             href={createPageUrl(page - 1)}
             className="
               flex
-              h-10
+              h-9
               items-center
               gap-2
               rounded-md
               border
               border-border-muted
-              px-4
-              text-sm
+              px-3
+              text-xs
               text-foreground
               hover:bg-surface
+              sm:h-10
+              sm:px-4
+              sm:text-sm
             "
           >
             <LeftArrow className="w-5 h-5" /> Previous
           </Link>
         ) : (
-          <div className="h-10" />
+          <div className="h-9 w-24 sm:h-10 sm:w-29" />
         )}
 
         {page < totalPages ? (
@@ -126,23 +132,26 @@ export default function ProductPagination({
             href={createPageUrl(page + 1)}
             className="
               flex
-              h-10
+              h-9
               items-center
-              gap-3.5
+              gap-2
               rounded-md
               border
               border-border-muted
-              px-5
-              leading-6
-              text-sm
+              px-3
+              text-xs
               text-foreground
               hover:bg-surface
+              sm:h-10
+              sm:gap-3.5
+              sm:px-5
+              sm:text-sm
             "
           >
             Next <RightArrow className="w-5 h-5 text-white" />
           </Link>
         ) : (
-          <div className="h-10" />
+          <div className="h-9 w-24 sm:h-10 sm:w-29" />
         )}
       </div>
     </div>

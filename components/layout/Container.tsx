@@ -4,7 +4,7 @@ interface ContainerProps {
 
 export default function Container({ children }: ContainerProps) {
   return (
-    <div className="mx-auto w-full max-w-[1440px] px-4 lg:px-0">{children}</div>
+    <div className="mx-auto w-full max-w-360 px-4 lg:px-0">{children}</div>
   );
 }
 

@@ -18,7 +18,7 @@ export default function CheckoutAddressSection({
 }: CheckoutAddressSectionProps) {
   return (
     <section>
-      <h2 className="text-2xl font-medium leading-9 tracking-[-0.01em] text-foreground">
+      <h2 className="text-xl font-medium leading-7 tracking-[-0.01em] text-foreground sm:text-2xl sm:leading-9">
         Address
       </h2>
       <div className="mt-4 rounded-md border border-border-default bg-surface p-4 sm:p-6">
@@ -26,7 +26,7 @@ export default function CheckoutAddressSection({
           <button
             type="button"
             onClick={() => setAddressMode("existing")}
-            className={`pb-3 text-lg font-semibold leading-7 transition ${
+            className={`pb-3 text-sm font-semibold leading-6 transition sm:text-lg sm:leading-7 ${
               addressMode === "existing"
                 ? "border-b-2 border-orange text-orange"
                 : "text-foreground-dim"
@@ -37,7 +37,7 @@ export default function CheckoutAddressSection({
           <button
             type="button"
             onClick={() => setAddressMode("new")}
-            className={`pb-3 text-lg font-semibold leading-7 transition ${
+            className={`pb-3 text-sm font-semibold leading-6 transition sm:text-lg sm:leading-7 ${
               addressMode === "new"
                 ? "border-b-2 border-orange text-orange"
                 : "text-foreground-dim"

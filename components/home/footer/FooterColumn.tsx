@@ -18,7 +18,7 @@ export default function FooterColumn({ title, items }: FooterColumnProps) {
               cursor-pointer
               text-[16px]
               leading-6.5
-              text-[#E7E7E7]
+              text-foreground-soft
               transition-colors
               hover:text-orange
             "

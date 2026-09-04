@@ -20,7 +20,7 @@ export default function ProfilePage({ user, orders }: ProfilePageProps) {
   return (
     <main className="px-6 pb-10 pt-6 text-white lg:px-10">
       <div className="mx-auto max-w-[1870px]">
-        <div className="mb-[58px] flex items-center gap-6 text-base leading-6.5">
+        <div className="mb-14.5 flex items-center gap-6 text-base leading-6.5">
           <Link href="/" className="text-foreground-dim hover:text-white">
             Home
           </Link>
@@ -108,7 +108,7 @@ export default function ProfilePage({ user, orders }: ProfilePageProps) {
 
                           <div className="mt-3.5 text-lg font-medium leading-7 tracking-normal text-foreground">
                             Your order nr {invoiceNumber}
-                            <ul className="list-disc pl-4 text-lg font-medium leading-7 tracking-normal text-foreground">
+                            <ul className="list-disc pl-4 text-[14px] sm:text-lg font-medium leading-7 tracking-normal text-foreground">
                               {order.orderItems.map((item) => (
                                 <li key={item.id}>{item.product.name}</li>
                               ))}

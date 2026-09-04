@@ -1,43 +1,11 @@
-// import { Product } from "@/types/product";
-
-// import ProductCard from "./ProductCard";
-
-// interface RecommendationListProps {
-//   products: Product[];
-//   showAll: boolean;
-// }
-
-// export default function RecommendationList({
-//   products,
-//   showAll,
-// }: RecommendationListProps) {
-//   return (
-//     <div className="overflow-hidden">
-//       <div
-//         className={`
-//           flex
-//           gap-8
-//           transition-transform
-//           duration-500
-//           ${showAll ? "-translate-x-[634px]" : "translate-x-0"}
-//         `}
-//       >
-//         {products.map((product) => (
-//           <div key={product.id} className="w-[300px] shrink-0">
-//             <ProductCard product={product} />
-//           </div>
-//         ))}
-//       </div>
-//     </div>
-//   );
-// }
-
 "use client";
 
 import { useRef } from "react";
 
 import { Product } from "@/types/product";
 import ProductCard from "./ProductCard";
+import LeftArrow from "@/components/icons/navigation/LeftArrow";
+import RightArrow from "@/components/icons/navigation/RightArrow";
 
 interface RecommendationListProps {
   products: Product[];
@@ -83,7 +51,7 @@ export default function RecommendationList({
               key={product.id}
               className="
                 min-w-[calc(50%-8px)]
-                flex-shrink-0
+                shrink-0
                 snap-start
               "
             >
@@ -98,7 +66,7 @@ export default function RecommendationList({
             onClick={() => scroll("left")}
             className="rounded-full border px-3 py-2"
           >
-            ←
+            <LeftArrow className="h-4 w-4" />
           </button>
 
           <button
@@ -106,7 +74,7 @@ export default function RecommendationList({
             onClick={() => scroll("right")}
             className="rounded-full border px-3 py-2"
           >
-            →
+            <RightArrow className="h-4 w-4 text-white" />
           </button>
         </div>
       </div>
@@ -120,11 +88,11 @@ export default function RecommendationList({
             gap-8
             transition-transform
             duration-500
-            ${showAll ? "-translate-x-[634px]" : "translate-x-0"}
+            ${showAll ? "-translate-x-158.5" : "translate-x-0"}
           `}
         >
           {products.map((product) => (
-            <div key={product.id} className="w-[300px] shrink-0">
+            <div key={product.id} className="w-75 shrink-0">
               <ProductCard product={product} />
             </div>
           ))}

@@ -10,7 +10,7 @@ export default function ProductBreadcrumb({
   categoryName,
 }: ProductBreadcrumbProps) {
   return (
-    <nav className="mb-10 flex items-center gap-2 text-[16px] text-[#A1A1AA]">
+    <nav className="mb-6 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-[#A1A1AA] sm:mb-8 sm:text-sm lg:mb-10 lg:text-base">
       <Link href="/products">Product</Link>
 
       <span>›</span>
@@ -19,7 +19,7 @@ export default function ProductBreadcrumb({
 
       <span>›</span>
 
-      <span className="text-white">{productName}</span>
+      <span className="break-words text-white">{productName}</span>
     </nav>
   );
 }

@@ -1,4 +1,10 @@
+import { useId } from "react";
+
 export default function AocLogo() {
+  const logoId = useId();
+  const patternId = `${logoId}-pattern`;
+  const imageId = `${logoId}-image`;
+
   return (
     <svg
       width="137"
@@ -8,21 +14,21 @@ export default function AocLogo() {
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
     >
-      <rect width="136.803" height="46" fill="url(#pattern0_1488_29191)" />
+      <rect width="136.803" height="46" fill={`url(#${patternId})`} />
       <defs>
         <pattern
-          id="pattern0_1488_29191"
+          id={patternId}
           patternContentUnits="objectBoundingBox"
           width="1"
           height="1"
         >
           <use
-            xlinkHref="#image0_1488_29191"
+            xlinkHref={`#${imageId}`}
             transform="matrix(0.000832302 0 0 0.00247525 -0.00562344 0)"
           />
         </pattern>
         <image
-          id="image0_1488_29191"
+          id={imageId}
           width="1215"
           height="404"
           preserveAspectRatio="none"

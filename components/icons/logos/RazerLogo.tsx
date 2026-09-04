@@ -1,4 +1,10 @@
+import { useId } from "react";
+
 export default function RazerLogo() {
+  const logoId = useId();
+  const patternId = `${logoId}-pattern`;
+  const imageId = `${logoId}-image`;
+
   return (
     <svg
       width="46"
@@ -8,21 +14,21 @@ export default function RazerLogo() {
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
     >
-      <rect width="45.5265" height="46" fill="url(#pattern0_1488_29194)" />
+      <rect width="45.5265" height="46" fill={`url(#${patternId})`} />
       <defs>
         <pattern
-          id="pattern0_1488_29194"
+          id={patternId}
           patternContentUnits="objectBoundingBox"
           width="1"
           height="1"
         >
           <use
-            xlinkHref="#image0_1488_29194"
+            xlinkHref={`#${imageId}`}
             transform="scale(0.0008 0.000791766)"
           />
         </pattern>
         <image
-          id="image0_1488_29194"
+          id={imageId}
           width="1250"
           height="1263"
           preserveAspectRatio="none"

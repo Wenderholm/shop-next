@@ -1,5 +1,10 @@
 import { useState } from "react";
 
+interface SeeAllButtonProps {
+  showAll: boolean;
+  setShowAll: (showAll: boolean) => void;
+}
+
 export default function SeeAllButton({
   showAll,
   setShowAll,
@@ -13,9 +18,4 @@ export default function SeeAllButton({
       {showAll ? "Show less" : "See all"}
     </button>
   );
-}
-
-interface SeeAllButtonProps {
-  showAll: boolean;
-  setShowAll: (showAll: boolean) => void;
 }

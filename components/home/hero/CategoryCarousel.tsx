@@ -33,7 +33,7 @@ export default function CategoryCarousel({
         className="
     relative
     w-full 
-    max-w-[1360px]     
+    max-w-340     
     lg:mx-10
     bg-surface-elevated 
     rounded-md 
@@ -41,8 +41,8 @@ export default function CategoryCarousel({
     border-border-default 
     overflow-hidden"
       >
-        <div className=" max-w-[433px] flex-col  sm:ml-30">
-          <h2 className="font-medium text-[32px]  leading-11 tracking-[-0.32px] text-foreground mb-6 pt-[132px]">
+        <div className=" max-w-108.25 flex-col px-3 sm:ml-30">
+          <h2 className="font-medium text-[32px] text-center leading-11 tracking-[-0.32px] text-foreground mb-6 pt-5 sm:pt-33">
             {category.name}
           </h2>
 
@@ -94,12 +94,13 @@ export default function CategoryCarousel({
           // -translate-y-1/2 → przesuwa przycisk do góry o połowę jego własnej wysokości.
           className="
     absolute
-    top-1/2 
-    -translate-y-1/2
+    bottom-1
+    sm:top-1/2 
+    sm:-translate-y-1/2
     left-0
     flex
-    h-[74px]
-    w-[44px]
+    h-18.5
+    w-11
     items-center
     justify-center
     rounded-br-md
@@ -115,12 +116,13 @@ export default function CategoryCarousel({
           type="button"
           className="
     absolute
-    top-1/2
-    -translate-y-1/2
+    bottom-1
+    sm:top-1/2 
+    sm:-translate-y-1/2
     right-0
     flex
-    h-[74px]
-    w-[44px]
+    h-18.5
+    w-11
     items-center
     justify-center
     rounded-bl-md

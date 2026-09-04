@@ -43,13 +43,13 @@ export default function RegisterForm() {
 
   return (
     <div className="w-full max-w-110">
-      <div className="mt-19.25 mb-8 text-center text-[40px] font-bold leading-none tracking-[-0.04em] text-white">
+      <div className="sm:mt-19.25 mb-8 text-center text-[40px] font-bold leading-none tracking-[-0.04em] text-white">
         <span className="text-orange">Nexus</span>
         <span>Hub</span>
       </div>
 
       <div className="rounded-2xl border border-[#343846] bg-surface-elevated px-6 py-7 text-white shadow-[0_24px_80px_rgba(0,0,0,0.35)] sm:px-7">
-        <h1 className="text-[2rem] font-semibold tracking-[-0.03em] text-foreground">
+        <h1 className="sm:text-[2rem] font-semibold tracking-[-0.03em] text-foreground">
           Create Account
         </h1>
 
@@ -58,7 +58,7 @@ export default function RegisterForm() {
         <form
           onSubmit={handleSubmit(onSubmit)}
           noValidate
-          className="mt-8 space-y-7"
+          className="mt-8 space-y-3 sm:space-y-7"
         >
           {submitError && (
             <p className="rounded-xl border border-red-500/40 bg-red-500/10 px-4 py-3 text-sm text-[#ff8b8b]">
@@ -179,7 +179,7 @@ export default function RegisterForm() {
             )}
           </div>
 
-          <label className="flex items-start gap-3 text-sm leading-6 text-foreground-soft">
+          <label className="flex items-start gap-3 text-sm leading-6 text-foreground-muted">
             <input
               type="checkbox"
               defaultChecked

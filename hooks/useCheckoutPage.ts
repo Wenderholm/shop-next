@@ -6,10 +6,10 @@ import { useMemo, useState } from "react";
 import { useCart } from "@/contexts/CartContext";
 import { useCartItems, type CartItem } from "@/hooks/useCartItems";
 import {
+  calculateItemCount,
   calculateGrandTotal,
-  SERVICE_FEE,
-  SHIPPING_INSURANCE,
-  SHIPPING_PRICE,
+  calculateSubtotal,
+  getCheckoutFees,
 } from "@/lib/checkout";
 import {
   type CheckoutAddressFormState,
@@ -56,24 +56,14 @@ export function useCheckoutPage({ userCountry }: UseCheckoutPageOptions) {
     );
   };
 
-  const subtotal = useMemo(
-    () =>
-      items.reduce(
-        (sum, item) => sum + Number(item.priceAtPurchase) * item.quantity,
-        0,
-      ),
-    [items],
-  );
+  const subtotal = useMemo(() => calculateSubtotal(items), [items]);
 
-  const itemCount = useMemo(
-    () => items.reduce((sum, item) => sum + item.quantity, 0),
-    [items],
-  );
+  const itemCount = useMemo(() => calculateItemCount(items), [items]);
 
   const protectionTotal = protectedItems.length;
-  const shippingPrice = items.length > 0 ? SHIPPING_PRICE : 0;
-  const shippingInsurance = items.length > 0 ? SHIPPING_INSURANCE : 0;
-  const serviceFee = items.length > 0 ? SERVICE_FEE : 0;
+  const { shippingPrice, shippingInsurance, serviceFee } = getCheckoutFees(
+    items.length > 0,
+  );
   const grandTotal = calculateGrandTotal(subtotal, protectionTotal);
   const breadcrumbLabel = items[0]?.product.name ?? "Checkout";
 

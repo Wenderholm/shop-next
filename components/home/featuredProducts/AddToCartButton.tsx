@@ -33,12 +33,11 @@ export default function AddToCartButton({ product }: AddToCartButtonProps) {
     w-8
     items-center
     justify-center
-    rounded-[6px]
     border
-    border-[#383B42]
+    border-border-default
     bg-[#262626]
     text-white
-    rounded-[6px]
+    rounded-md
     z-1
       "
         onClick={handleAddToCart}

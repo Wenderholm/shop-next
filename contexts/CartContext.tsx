@@ -8,6 +8,7 @@ import {
   useState,
 } from "react";
 import { Product } from "@/types/product";
+import { calculateItemCount } from "@/lib/checkout";
 
 interface CartContextValue {
   itemCount: number;
@@ -30,13 +31,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
       .then((response) => (response.ok ? response.json() : null))
       .then((cart) => {
         if (!isMounted || !cart) return;
-        setItemCount(
-          cart.orderItems?.reduce(
-            (total: number, item: { quantity: number }) =>
-              total + item.quantity,
-            0,
-          ) ?? 0,
-        );
+        setItemCount(calculateItemCount(cart.orderItems ?? []));
       });
 
     return () => {
@@ -48,12 +43,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
     const response = await fetch("/api/orders", { cache: "no-store" });
     if (!response.ok) return;
     const cart = await response.json();
-    setItemCount(
-      cart.orderItems?.reduce(
-        (total: number, item: { quantity: number }) => total + item.quantity,
-        0,
-      ) ?? 0,
-    );
+    setItemCount(calculateItemCount(cart.orderItems ?? []));
   };
 
   const clearCart = () => {

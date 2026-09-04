@@ -59,7 +59,7 @@ export default function CheckoutPage({ userCountry }: CheckoutPageProps) {
         </div>
       ) : (
         <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_423px] xl:grid-cols-[minmax(0,1fr)_423px]">
-          <section className="space-y-9">
+          <section className="space-y-10">
             <CheckoutOrderList
               items={items}
               protectedItems={protectedItems}

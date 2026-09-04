@@ -20,57 +20,70 @@ export default function CheckoutOrderItem({
 }: CheckoutOrderItemProps) {
   return (
     <div className="rounded-md border border-border-strong bg-surface">
-      <div className="flex min-w-0 flex-1 justify-between rounded-lg border border-border-strong bg-surface p-5">
-        <div className="flex min-w-0 gap-4">
-          <Image
-            src={item.product.imageUrls[0]}
-            alt={item.product.name}
-            width={172}
-            height={138}
-            className="h-34 w-40 rounded-md bg-white object-contain p-2"
-          />
+      <div className="flex min-w-0 flex-1 rounded-lg border border-border-strong bg-surface p-4 sm:p-5">
+        <div className="flex min-w-0 flex-1 flex-col items-center gap-4 lg:flex-row lg:items-start lg:gap-8">
+          <div className="shrink-0 rounded-md border border-border-default p-3 sm:h-40 sm:w-40 lg:h-34.5 lg:w-43">
+            <Image
+              src={item.product.imageUrls[0]}
+              alt={item.product.name}
+              width={172}
+              height={138}
+              className="h-32 w-full rounded-md bg-white object-contain p-5"
+            />
+          </div>
 
           <div className="min-w-0 flex-1">
-            <div>
-              <h2 className="text-xl font-medium leading-7.5 tracking-[-0.01em] text-foreground">
+            <div className="text-center sm:text-left">
+              <h2 className="text-lg font-medium leading-7 tracking-[-0.01em] text-foreground sm:text-xl sm:leading-7.5">
                 {item.product.name}
               </h2>
 
-              <span className={`mt-3 ${labelStyle}`}>
-                {item.product.category.name}
-              </span>
+              <div className="mt-3">
+                <span
+                  className={`${labelStyle} text-xs leading-5 sm:text-sm sm:leading-6`}
+                >
+                  {item.product.category.name}
+                </span>
+              </div>
             </div>
-            <p className="mt-4 text-[30px] font-semibold leading-10 tracking-[-0.01em] text-foreground">
-              ${Number(item.priceAtPurchase).toFixed(2)}
-            </p>
-          </div>
-        </div>
 
-        <div className="flex items-end gap-6 text-sm text-brand-strong">
-          <span className="inline-block border-r border-neutral-soft py-2 pl-2 pr-6 text-base leading-6.5 text-orange">
-            Write Note
-          </span>
-          <div className="flex items-center rounded-md border border-gray-500 px-3 py-2 text-white">
-            <button
-              type="button"
-              onClick={() => onUpdateQuantity(item, item.quantity - 1)}
-              className="h-6 w-6 text-xl leading-none"
-            >
-              −
-            </button>
-            <span className="w-10 text-center text-sm">{item.quantity}</span>
-            <button
-              type="button"
-              onClick={() => onUpdateQuantity(item, item.quantity + 1)}
-              className="h-6 w-6 text-xl leading-none"
-            >
-              +
-            </button>
+            <div className="mt-3 flex flex-col items-center justify-between gap-4 sm:mt-4 sm:flex-row sm:items-center sm:text-left">
+              <p className="text-2xl font-semibold leading-8 tracking-[-0.01em] text-foreground sm:text-[24px] sm:leading-10">
+                ${Number(item.priceAtPurchase).toFixed(2)}
+              </p>
+
+              <div className="flex items-center justify-between gap-4">
+                <div className="flex w-full items-center justify-between gap-4 sm:w-auto sm:justify-start sm:gap-6">
+                  <span className="inline-block border-r border-neutral-soft py-0 pr-4 text-[12px] sm:text-sm leading-6 text-orange sm:pl-2 sm:pr-6 sm:leading-6.5">
+                    Write Note
+                  </span>
+                  <div className="flex items-center rounded-md border border-[#D5D5D5] px-2 py-1.5 text-white">
+                    <button
+                      type="button"
+                      onClick={() => onUpdateQuantity(item, item.quantity - 1)}
+                      className="h-8 w-7 text-xl sm:h-9 sm:w-8 sm:text-2xl"
+                    >
+                      −
+                    </button>
+                    <span className="w-8 text-center text-sm">
+                      {item.quantity}
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => onUpdateQuantity(item, item.quantity + 1)}
+                      className="h-8 w-7 text-xl sm:h-9 sm:w-8 sm:text-2xl"
+                    >
+                      +
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      <div className="flex flex-col gap-3 border-t border-border-default p-6 sm:flex-row sm:items-start sm:justify-between sm:px-6">
+      <div className="flex flex-col gap-3 border-t border-border-default p-4 sm:p-6 sm:px-6">
         <button
           type="button"
           onClick={() => onToggleProtection(item.id)}
@@ -85,19 +98,20 @@ export default function CheckoutOrderItem({
           >
             {isProtected ? <CheckIcon className="h-3.5 w-3.5" /> : null}
           </span>
-          <span>
-            <span className="block text-base font-medium leading-6.5 text-foreground">
-              Product Protection
-            </span>
-            <span className="mt-1 block text-sm leading-6 text-foreground-soft">
-              The claim process is easy and instant, valid for 6 months
-            </span>
-          </span>
+          <div className="flex flex-col sm:flex-row gap-1 justify-between w-full">
+            <div>
+              <span className="block text-sm font-medium leading-6 text-foreground sm:text-base sm:leading-6.5">
+                Product Protection
+              </span>
+              <span className="mt-1 block text-xs leading-5 text-foreground-soft sm:text-sm sm:leading-6">
+                The claim process is easy and instant, valid for 6 months
+              </span>
+            </div>
+            <div className="pl-9 text-sm  font-medium leading-6 text-foreground sm:pl-9 sm:text-lg sm:leading-7 lg:pl-0">
+              $1
+            </div>
+          </div>
         </button>
-
-        <span className="pl-8 text-lg font-medium leading-7 text-foreground sm:pl-0">
-          $1
-        </span>
       </div>
     </div>
   );

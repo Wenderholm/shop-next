@@ -27,7 +27,7 @@ export default function CategoryCard({ category }: CategoryCardProps) {
         flex-col
         items-center
         gap-6
-        py-[28px]
+        py-7
         rounded-md
         border
         border-border-muted
@@ -36,7 +36,7 @@ export default function CategoryCard({ category }: CategoryCardProps) {
     >
       <div>{icons[category.name as keyof typeof icons]}</div>
 
-      <span className="font-medium text-[20px] leading-7.5 tracking-[-0.01em] text-[#FCFCFC]">
+      <span className="font-medium text-[20px] leading-7.5 tracking-[-0.01em] text-foreground">
         {category.name}
       </span>
     </Link>

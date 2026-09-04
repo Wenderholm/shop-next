@@ -1,6 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 import { auth } from "@/auth";
+import { calculateSubtotal } from "@/lib/checkout";
 
 async function getUserId() {
   const session = await auth();
@@ -11,10 +12,7 @@ async function getUserId() {
 
 async function recalculateTotal(orderId: number) {
   const items = await prisma.orderItem.findMany({ where: { orderId } });
-  const totalAmount = items.reduce(
-    (total, item) => total + Number(item.priceAtPurchase) * item.quantity,
-    0,
-  );
+  const totalAmount = calculateSubtotal(items);
   await prisma.order.update({ where: { id: orderId }, data: { totalAmount } });
 }
 
@@ -90,10 +88,7 @@ export async function POST(request: Request) {
   const items = await prisma.orderItem.findMany({
     where: { orderId: order.id },
   });
-  const totalAmount = items.reduce(
-    (total, item) => total + Number(item.priceAtPurchase) * item.quantity,
-    0,
-  );
+  const totalAmount = calculateSubtotal(items);
   const updatedCart = await prisma.order.update({
     where: { id: order.id },
     data: { totalAmount },

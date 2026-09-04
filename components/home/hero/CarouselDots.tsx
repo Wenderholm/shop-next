@@ -27,7 +27,7 @@ export default function CarouselDots({
         <div
           key={index}
           className={`h-3 w-3 rounded-full ${
-            index === currentIndex ? "bg-orange" : "bg-[#383B42]"
+            index === currentIndex ? "bg-orange" : "bg-border-default"
           }`}
         />
       ))}

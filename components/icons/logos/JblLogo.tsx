@@ -1,4 +1,10 @@
+import { useId } from "react";
+
 export default function JblLogo() {
+  const logoId = useId();
+  const patternId = `${logoId}-pattern`;
+  const imageId = `${logoId}-image`;
+
   return (
     <svg
       width="83"
@@ -8,21 +14,21 @@ export default function JblLogo() {
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
     >
-      <rect width="82.8829" height="46" fill="url(#pattern0_1488_29188)" />
+      <rect width="82.8829" height="46" fill={`url(#${patternId})`} />
       <defs>
         <pattern
-          id="pattern0_1488_29188"
+          id={patternId}
           patternContentUnits="objectBoundingBox"
           width="1"
           height="1"
         >
           <use
-            xlinkHref="#image0_1488_29188"
+            xlinkHref={`#${imageId}`}
             transform="scale(0.00125 0.00225225)"
           />
         </pattern>
         <image
-          id="image0_1488_29188"
+          id={imageId}
           width="800"
           height="444"
           preserveAspectRatio="none"

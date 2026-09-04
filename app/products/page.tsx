@@ -82,12 +82,22 @@ export default async function ProductsPage({
 
   return (
     <>
-      <div className="flex pt-10">
-        <aside className="w-60 shrink-0 border-t border-r border-border-default">
+      <div className="px-4 pt-6 md:hidden">
+        <details className="rounded-md border border-border-default bg-surface">
+          <summary className="cursor-pointer px-4 py-3 text-lg font-medium text-foreground">
+            Filters
+          </summary>
+
+          <ProductFilters categories={categories} brands={brands} />
+        </details>
+      </div>
+
+      <div className="flex flex-col pt-6 md:flex-row md:pt-10">
+        <aside className="hidden w-60 shrink-0 border-t border-r border-border-default md:block">
           <ProductFilters categories={categories} brands={brands} />
         </aside>
 
-        <section className="mb-10 flex-1 border-t border-border-default pl-10 pt-10">
+        <section className="mb-10 min-w-0 flex-1 border-t border-border-default px-4 pt-6 md:pl-6 md:pt-10 lg:pl-10">
           <ProductsToolbar />
           <ProductGrid products={products.data} />
 

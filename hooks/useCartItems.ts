@@ -1,11 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import type { SerializedPrice } from "@/lib/checkout";
 
 export interface CartItem {
   id: number;
   quantity: number;
-  priceAtPurchase: string | number;
+  priceAtPurchase: SerializedPrice;
   product: {
     id: number;
     name: string;

@@ -26,7 +26,7 @@ export default function CheckoutNewAddressForm({
 }: CheckoutNewAddressFormProps) {
   return (
     <div className="space-y-4 pt-6">
-      <div className="mb-8 grid gap-8 sm:grid-cols-2">
+      <div className="mb-6 grid gap-4 sm:mb-8 sm:gap-8 sm:grid-cols-2">
         <div className="relative w-full">
           <select
             value={form.newAddressCountry}
@@ -116,7 +116,7 @@ export default function CheckoutNewAddressForm({
         onChange={(event) => form.setStreetAddress(event.target.value)}
         rows={5}
         placeholder="Input Complete Address"
-        className="w-full rounded-md border border-[#4B4B4B] bg-transparent px-4 py-3 text-sm text-foreground outline-none placeholder:text-base placeholder:font-normal placeholder:text-[#7B7B7B]"
+        className="w-full rounded-md border border-[#4B4B4B] bg-transparent px-4 py-3 text-sm text-foreground outline-none placeholder:text-sm placeholder:font-normal placeholder:text-[#7B7B7B] sm:placeholder:text-base"
       />
 
       <label className="flex items-center gap-3 text-sm text-foreground-soft">
@@ -131,7 +131,7 @@ export default function CheckoutNewAddressForm({
         >
           {form.isMainAddress ? <CheckIcon className="h-3.5 w-3.5" /> : null}
         </button>
-        <span className="text-base font-medium leading-6.5 tracking-normal">
+        <span className="text-sm font-medium leading-6 tracking-normal sm:text-base sm:leading-6.5">
           Make it the main address
         </span>
       </label>

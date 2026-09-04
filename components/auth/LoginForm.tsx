@@ -1,13 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { signIn } from "next-auth/react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { useLogin } from "@/hooks/useLogin";
 
-import { loginFormSchema, type LoginFormData } from "@/schemas/login.schema";
 import CheckIcon from "../icons/ui/CheckIcon";
 // font-normal   tracking-normal
 const inputBaseClass =
@@ -23,103 +18,35 @@ const labelClass = "text-lg font-medium leading-7 text-foreground";
 const errorClass = "mt-2 text-sm text-danger";
 
 export default function LoginForm() {
-  const router = useRouter();
-
-  const [step, setStep] = useState<"email" | "password">("email");
-
-  const [submitError, setSubmitError] = useState<string | null>(null);
-
-  const [isMarked, setIsMarked] = useState(false);
   const {
+    step,
+    submitError,
+    isMarked,
     register,
     handleSubmit,
-    setError,
-    formState: { errors, isSubmitting },
-  } = useForm<LoginFormData>({
-    resolver: zodResolver(loginFormSchema),
-  });
-
-  const handleEmailSubmit = async (data: LoginFormData) => {
-    setSubmitError(null);
-
-    const response = await fetch("/api/auth/check-email", {
-      method: "POST",
-
-      headers: {
-        "Content-Type": "application/json",
-      },
-
-      body: JSON.stringify({
-        email: data.email,
-      }),
-    });
-
-    const result = await response.json();
-
-    if (!result.exists) {
-      setSubmitError("User with this email does not exist");
-
-      return;
-    }
-
-    setStep("password");
-  };
-
-  const handlePasswordSubmit = async (data: LoginFormData) => {
-    setSubmitError(null);
-
-    if (!data.password) {
-      setError("password", {
-        type: "manual",
-        message: "Password is required",
-      });
-
-      return;
-    }
-
-    const result = await signIn("credentials", {
-      email: data.email,
-      password: data.password,
-      redirect: false,
-    });
-
-    if (result?.error) {
-      setSubmitError("Invalid password");
-
-      return;
-    }
-
-    router.replace("/?login=success");
-    router.refresh();
-  };
-
-  const onSubmit = async (data: LoginFormData) => {
-    if (step === "email") {
-      await handleEmailSubmit(data);
-
-      return;
-    }
-
-    await handlePasswordSubmit(data);
-  };
+    errors,
+    isSubmitting,
+    onSubmit,
+    toggleSavePassword,
+  } = useLogin();
 
   return (
     <div className="w-full max-w-110 mx-auto">
       {/* LOGO */}
-      <div className="mt-20 mb-8 text-center text-[40px] font-bold leading-none tracking-[-0.04em] text-white">
+      <div className="sm:mt-20 mb-8 text-center text-2xl sm:text-[40px] font-bold leading-none tracking-[-0.04em] text-white">
         <span className="text-orange">Nexus</span>
         <span>Hub</span>
       </div>
 
-      <div className="mb-20 rounded-2xl border border-border-default bg-surface p-6 text-white sm:px-7">
-        <h1 className="border-b border-border-default pb-5 text-2xl font-medium leading-9 tracking-[-0.01em] text-foreground">
+      <div className=" mb-10 sm:mb-20 rounded-2xl border border-border-default bg-surface p-6 text-white sm:px-7">
+        <h1 className="border-b border-border-default pb-5 text-center sm:text-left sm:text-2xl  font-medium leading-9 tracking-[-0.01em] text-foreground">
           {step === "email" ? "Sign In" : "Enter Password"}
         </h1>
 
         <form
           onSubmit={handleSubmit(onSubmit)}
           noValidate
-          className="mt-8 space-y-7"
+          className="mt-4 sm:mt-8 space-y-7"
         >
           {/* BŁĄD Z API / NEXTAUTH */}
           {submitError && (
@@ -191,7 +118,7 @@ export default function LoginForm() {
           {step === "password" && (
             <button
               type="button"
-              onClick={() => setIsMarked(!isMarked)}
+              onClick={toggleSavePassword}
               className="flex justify-between items-center w-full"
             >
               <div className="flex gap-3">
@@ -218,7 +145,7 @@ export default function LoginForm() {
           )}
 
           {/* REJESTRACJA */}
-          <p className=" text-[16px] text-[#E7E7E7]">
+          <p className=" text-[16px] text-foreground-soft">
             Don&apos;t have an account? <Link href="/register">Register</Link>
           </p>
         </form>

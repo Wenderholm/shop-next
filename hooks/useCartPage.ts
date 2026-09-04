@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 
 import { useCart } from "@/contexts/CartContext";
 import { useCartItems } from "@/hooks/useCartItems";
+import { calculateItemCount, calculateSubtotal } from "@/lib/checkout";
 
 export function useCartPage() {
   const router = useRouter();
@@ -74,16 +75,15 @@ export function useCartPage() {
     return items.filter((item) => selected.includes(item.id));
   }, [items, selected]);
 
-  const total = useMemo(() => {
-    return selectedItems.reduce(
-      (sum, item) => sum + Number(item.priceAtPurchase) * item.quantity,
-      0,
-    );
-  }, [selectedItems]);
+  const total = useMemo(
+    () => calculateSubtotal(selectedItems),
+    [selectedItems],
+  );
 
-  const selectedItemCount = useMemo(() => {
-    return selectedItems.reduce((sum, item) => sum + item.quantity, 0);
-  }, [selectedItems]);
+  const selectedItemCount = useMemo(
+    () => calculateItemCount(selectedItems),
+    [selectedItems],
+  );
 
   const goToCheckout = () => {
     if (selected.length === 0) {

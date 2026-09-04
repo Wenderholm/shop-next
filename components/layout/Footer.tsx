@@ -11,14 +11,14 @@ const resources = ["E-books", "Tutorials", "Course", "Blog"];
 
 export default function Footer() {
   return (
-    <footer className=" bg-[#222327] px-8 py-35 lg:px-15 lg:pl-35 lg:pr-40">
+    <footer className=" bg-surface-elevated px-8 py-10 sm:py-35 lg:px-15 lg:pl-35 lg:pr-40">
       <div className="flex flex-col lg:flex-row lg:justify-between ">
         <div>
-          <h2 className="mb-6 text-[36px] font-semibold leading-[46px] tracking-[-0.01em] text-[#FCFCFC]">
+          <h2 className="mb-6 text-[36px] font-semibold leading-11.5 tracking-[-0.01em] text-foreground">
             <span className="text-orange">Nexus</span>Hub
           </h2>
 
-          <p className="mb-10 text-[16px] text-[#E7E7E7] leading-[26px] ">
+          <p className="mb-10 text-[16px] text-foreground-soft leading-6.5 ">
             © 2023 NexusHub.
             <br />
             All rights reserved.

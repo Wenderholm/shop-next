@@ -2,7 +2,7 @@ import React from "react";
 
 interface SeeAllButtonProps {
   showAll: boolean;
-  setShowAll: React.Dispatch<React.SetStateAction<boolean>>;
+  setShowAll: (showAll: boolean) => void;
 }
 
 export default function SeeAllButton({

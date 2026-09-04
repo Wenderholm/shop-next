@@ -17,7 +17,7 @@ export default function CartNotification() {
         my-4
         items-center
         justify-between
-        rounded-[6px]
+        rounded-md
         border
         border-[#22C55E]
         bg-[#295B40]
@@ -27,9 +27,9 @@ export default function CartNotification() {
       "
     >
       <div className="flex items-center gap-4">
-        <SuccessMark className="w-[25px] h-[25px]" />
+        <SuccessMark className="w-6.25 h-6.25" />
         <div className="w-full flex items-center justify-between">
-          <span className="text-[#FCFCFC] text-[20px] leading-[30px] tracking-[-0.01em] ">
+          <span className="text-foreground text-[20px] leading-7.5 tracking-[-0.01em] ">
             Product Successfully Added
           </span>
           <button

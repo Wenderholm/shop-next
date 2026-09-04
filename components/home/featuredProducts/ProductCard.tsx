@@ -19,11 +19,11 @@ export default function ProductCard({ product }: ProductCardProps) {
         overflow-hidden
         rounded-md
         border
-        border-[#383B42]
+        border-border-default
         bg-[#262626]
       "
     >
-      <div className="relative p-4 pb-[18px] justify-center items-center flex w-full">
+      <div className="relative p-4 pb-4.5 justify-center items-center flex w-full">
         <AddToCartButton product={product} />
 
         <Image
@@ -31,20 +31,20 @@ export default function ProductCard({ product }: ProductCardProps) {
           alt={product.name}
           width={300}
           height={280}
-          className="h-full w-full object-contain rounded-[6px]"
+          className="h-45 w-full  rounded-md sm:h-44 md:h-56 lg:h-64"
         />
       </div>
 
       <div className="px-4 pb-5">
-        <span className="inline-flex items-center rounded bg-[#E5610A] px-[10px] py-[6px] text-[14px] font-medium text-[#FDEDD7]">
+        <span className="inline-flex items-center rounded bg-brand-strong px-2.5 py-1.5 text-[14px] font-medium text-accent-soft">
           {product.category.name}
         </span>
 
-        <h3 className="mt-4 text-[18px] leading-7 text-[#FCFCFC]">
+        <h3 className="mt-4 text-[18px] leading-7 text-foreground">
           {product.name}
         </h3>
 
-        <p className="mt-2 font-semibold text-[28px] leading-[40px] tracking-[-0.01em] text-[#FCFCFC]">
+        <p className="mt-2 text-2xl font-semibold leading-8 tracking-[-0.01em] text-foreground sm:text-[28px] sm:leading-10">
           ${product.price}
         </p>
       </div>

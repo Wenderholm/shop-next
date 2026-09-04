@@ -24,21 +24,21 @@ export default function BrandCard({ brand }: BrandCardProps) {
     <div
       className="
         flex
-        h-[190px]
-        w-[220px]
-        flex-shrink-0
+        h-47.5
+        w-55
+        shrink-0
         flex-col
         items-center
         justify-center
         gap-4
-        rounded-[8px]
+        rounded-lg
         border
-        border-[#383B42]
+        border-border-default
         bg-[#262626]
       "
     >
-      <div className="h-[46px] ">{logos[brand.name as keyof typeof logos]}</div>
-      <p className="text-[20px] leading-[30px] tracking-[-0.01em] text-[#FCFCFC]">
+      <div className="">{logos[brand.name as keyof typeof logos]}</div>
+      <p className="text-[20px] leading-7.5 tracking-[-0.01em] text-foreground">
         {brand.name}
       </p>
     </div>

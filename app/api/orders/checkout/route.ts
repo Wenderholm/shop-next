@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
 
 import { auth } from "@/auth";
+import { calculateGrandTotal, calculateSubtotal } from "@/lib/checkout";
 import { prisma } from "@/lib/prisma";
-import { calculateGrandTotal } from "@/lib/checkout";
 
 async function getUserId() {
   const session = await auth();
@@ -59,10 +59,7 @@ export async function POST(request: Request) {
         });
       }
 
-      const subtotal = cart.orderItems.reduce(
-        (sum, item) => sum + Number(item.priceAtPurchase) * item.quantity,
-        0,
-      );
+      const subtotal = calculateSubtotal(cart.orderItems);
       const grandTotal = calculateGrandTotal(subtotal, Number(protectionCount));
 
       const order = await tx.order.update({

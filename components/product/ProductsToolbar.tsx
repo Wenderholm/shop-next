@@ -48,22 +48,27 @@ export default function ProductsToolbar() {
   };
 
   return (
-    <div className="mb-8 flex items-center gap-8">
-      <div className="flex items-center gap-3">
-        <span className="text-xl leading-7.5 text-foreground">Sort by</span>
+    <div className="mb-8 flex flex-col gap-4 sm:gap-5 md:flex-row md:items-center md:gap-8">
+      <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-3">
+        <span className="text-sm leading-6 text-foreground sm:text-xl sm:leading-7.5">
+          Sort by
+        </span>
 
         <select
           value={searchParams.get("sort") ?? ""}
           onChange={handleSortChange}
           className="
+            w-full
             rounded
             border
             border-border-muted
             bg-surface
-            px-4
+            px-3
             py-2
             text-sm
             text-foreground
+            sm:w-auto
+            sm:px-4
           "
         >
           {sortOptions.map((option) => (
@@ -74,21 +79,26 @@ export default function ProductsToolbar() {
         </select>
       </div>
 
-      <div className="flex items-center gap-3">
-        <span className="text-xl leading-7.5 text-foreground">Show</span>
+      <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-3">
+        <span className="text-sm leading-6 text-foreground sm:text-xl sm:leading-7.5">
+          Show
+        </span>
 
         <select
           value={searchParams.get("limit") ?? "9"}
           onChange={handleLimitChange}
           className="
+            w-full
             rounded
             border
             border-border-default
             bg-surface
-            px-4
+            px-3
             py-2
             text-sm
             text-foreground
+            sm:w-auto
+            sm:px-4
           "
         >
           {limits.map((limit) => (
