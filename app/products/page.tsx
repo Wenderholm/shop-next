@@ -62,18 +62,17 @@ export default async function ProductsPage({
   // powyzsze zapytanie api powstalo bo uzytkownik wybral kategorie Mouse, marke Logitech, wpisal w wyszukiwarce mouse, posortowal po cenie, wybral strone 1 i limit 10 produktow na stronie
   // wtedy dostaniemy konkretna odpowiedz z backendu, a nie wszystkie produkty, bo backend bedzie filtrowal produkty po kategoriach, markach, wyszukiwarce, sortowaniu, paginacji i limitach
 
+  const baseUrl = process.env.NEXTAUTH_URL || "http://localhost:3000";
+
   const productsResponse = await fetch(
-    `http://localhost:3000/api/products?${queryParams.toString()}`,
+    `${baseUrl}/api/products?${queryParams.toString()}`,
   );
 
-  const categoriesResponse = await fetch(
-    "http://localhost:3000/api/categories",
-  );
+  const categoriesResponse = await fetch(`${baseUrl}/api/categories`);
 
   const searchBrandsResponse = await fetch(
-    `http://localhost:3000/api/brands?category=${params.category ?? ""}`,
+    `${baseUrl}/api/brands?category=${params.category ?? ""}`,
   );
-
   const products: ProductsResponse = await productsResponse.json();
 
   const categories: Category[] = await categoriesResponse.json();
