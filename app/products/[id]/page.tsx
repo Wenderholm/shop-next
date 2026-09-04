@@ -7,10 +7,10 @@ interface ProductPageProps {
     id: string;
   }>;
 }
-
 export default async function ProductPage({ params }: ProductPageProps) {
   const { id } = await params;
-  const response = await fetch(`http://localhost:3000/api/products/${id}`);
+  const baseUrl = process.env.NEXTAUTH_URL || "http://localhost:3000";
+  const response = await fetch(`${baseUrl}/api/products/${id}`);
 
   if (!response.ok) {
     notFound();
