@@ -24,6 +24,16 @@ DevStock to aplikacja e-commerce zbudowana w Next.js dla sklepu z elektroniką i
 - React Hook Form + Zod
 - Material UI
 
+## Deployment
+
+Projekt został wdrożony na Vercel.
+
+Środowisko produkcyjne korzysta z bazy Neon PostgreSQL, a lokalnie projekt może działać na PostgreSQL uruchamianym przez Docker Compose.
+
+- Hosting: Vercel
+- Production database: Neon PostgreSQL
+- Local database: PostgreSQL + Docker Compose
+
 ## Struktura projektu
 
 ```text
