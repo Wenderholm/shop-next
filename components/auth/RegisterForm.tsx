@@ -43,7 +43,7 @@ export default function RegisterForm() {
 
   return (
     <div className="w-full max-w-110">
-      <div className="sm:mt-19.25 mb-8 text-center text-[40px] font-bold leading-none tracking-[-0.04em] text-white">
+      <div className="sm:mt-19.25 mb-8 text-center text-[40px] font-semibold leading-none tracking-[-0.01em] text-white">
         <span className="text-orange">Nexus</span>
         <span>Hub</span>
       </div>

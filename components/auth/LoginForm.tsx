@@ -33,7 +33,7 @@ export default function LoginForm() {
   return (
     <div className="w-full max-w-110 mx-auto">
       {/* LOGO */}
-      <div className="sm:mt-20 mb-8 text-center text-2xl sm:text-[40px] font-bold leading-none tracking-[-0.04em] text-white">
+      <div className="sm:mt-20 mb-8 text-center text-2xl sm:text-[40px] font-semibold leading-none tracking-[-0.01em] text-white">
         <span className="text-orange">Nexus</span>
         <span>Hub</span>
       </div>
