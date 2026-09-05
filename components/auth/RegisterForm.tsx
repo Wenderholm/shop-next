@@ -48,8 +48,8 @@ export default function RegisterForm() {
         <span>Hub</span>
       </div>
 
-      <div className="rounded-2xl border border-[#343846] bg-surface-elevated px-6 py-7 text-white shadow-[0_24px_80px_rgba(0,0,0,0.35)] sm:px-7">
-        <h1 className="sm:text-[2rem] font-semibold tracking-[-0.03em] text-foreground">
+      <div className="rounded-2xl border border-[#343846] bg-[#262626] px-6 py-7 text-white shadow-[0_24px_80px_rgba(0,0,0,0.35)] sm:px-7">
+        <h1 className="sm:text-[24px] leading-9 font-medium tracking-[-0.01em] text-foreground">
           Create Account
         </h1>
 
