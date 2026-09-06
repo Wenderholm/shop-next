@@ -42,7 +42,7 @@ export default function CategoryCarousel({
     overflow-hidden"
       >
         <div className=" max-w-108.25 flex-col px-3 sm:ml-30">
-          <h2 className="font-medium text-[32px] text-center leading-11 tracking-[-0.32px] text-foreground mb-6 pt-5 sm:pt-33">
+          <h2 className="font-medium text-[32px] text-center sm:text-left leading-11 tracking-[-0.32px] text-foreground mb-6 pt-5 sm:pt-33">
             {category.name}
           </h2>
 
