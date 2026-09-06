@@ -75,8 +75,8 @@ export function useLogin() {
 
       return;
     }
-
-    router.replace("/?login=success");
+    window.location.replace("/?login=success");
+    // router.replace("/?login=success");
     router.refresh();
   };
 
