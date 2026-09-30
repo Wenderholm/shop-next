@@ -116,6 +116,11 @@ npm run start:dev
 
 Aplikacja będzie dostępna pod adresem `http://localhost:3000`.
 
+## Konto testowe
+
+- **Login:** `test@gmail.com`
+- **Hasło:** `Test12345`
+
 ## Skrypty
 
 ```bash
